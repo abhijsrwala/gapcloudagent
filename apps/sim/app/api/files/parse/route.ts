@@ -181,7 +181,7 @@ async function handleExternalUrl(url: string, fileType?: string): Promise<ParseR
     const response = await fetch(url, {
       method: 'GET',
       headers: {
-        'User-Agent': 'SimStudio/1.0',
+        'User-Agent': 'gapcloud/1.0',
       },
       signal: AbortSignal.timeout(DOWNLOAD_TIMEOUT_MS), // Add timeout
     })

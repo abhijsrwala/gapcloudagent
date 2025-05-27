@@ -34,7 +34,7 @@ export async function middleware(request: NextRequest) {
   const isCustomDomain =
     hostname !== BASE_DOMAIN &&
     !hostname.startsWith('www.') &&
-    hostname.includes(isDevelopment ? 'localhost' : 'simstudio.ai')
+    hostname.includes(isDevelopment ? 'localhost' : 'gapcloud.ai')
   const subdomain = isCustomDomain ? hostname.split('.')[0] : null
 
   // Handle chat subdomains

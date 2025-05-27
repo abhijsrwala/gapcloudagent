@@ -7,7 +7,7 @@ export default function AdminPage() {
         <div className="mb-6 px-1">
           <h1 className="text-2xl font-bold tracking-tight">Admin Dashboard</h1>
           <p className="text-muted-foreground mt-1 text-sm">
-            Manage Sim Studio platform settings and users.
+            Manage GapCloud Agent platform settings and users.
           </p>
         </div>
 

@@ -537,7 +537,7 @@ export function Subscription({
                   size="sm"
                   onClick={() => {
                     window.open(
-                      'https://calendly.com/emir-simstudio/15min',
+                      'https://calendly.com/emir-gapcloud/15min',
                       '_blank',
                       'noopener,noreferrer'
                     )

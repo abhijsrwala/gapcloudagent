@@ -12,7 +12,7 @@ export default function VerifyPage() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-gray-50">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h1 className="text-2xl font-bold text-center mb-8">Sim Studio</h1>
+        <h1 className="text-2xl font-bold text-center mb-8">GapCloud Agent</h1>
         <VerifyContent hasResendKey={hasResendKey} baseUrl={baseUrl} isProduction={isProd} />
       </div>
     </main>

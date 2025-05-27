@@ -41,7 +41,7 @@ export const JiraBlock: BlockConfig<JiraResponse> = {
       title: 'Domain',
       type: 'short-input',
       layout: 'full',
-      placeholder: 'Enter Jira domain (e.g., simstudio.atlassian.net)',
+      placeholder: 'Enter Jira domain (e.g., gapcloud.atlassian.net)',
     },
     {
       id: 'credential',

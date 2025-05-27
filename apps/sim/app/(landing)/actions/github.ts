@@ -22,11 +22,11 @@ export async function getFormattedGitHubStars(): Promise<string> {
   try {
     const token = process.env.GITHUB_TOKEN
 
-    const response = await fetch('https://api.github.com/repos/simstudioai/sim', {
+    const response = await fetch('https://api.github.com/repos/gapcloudai/sim', {
       headers: {
         Accept: 'application/vnd.github+json',
         'X-GitHub-Api-Version': '2022-11-28',
-        'User-Agent': 'SimStudio/1.0',
+        'User-Agent': 'gapcloud/1.0',
         ...(token ? { Authorization: `Bearer ${token}` } : {}),
       },
       next: { revalidate: 3600 }, // Revalidate every hour

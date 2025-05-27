@@ -1,27 +1,27 @@
 <p align="center">
-  <img src="apps/sim/public/static/sim.png" alt="Sim Studio Logo" width="500"/>
+  <img src="apps/sim/public/static/sim.png" alt="GapCloud Agent Logo" width="500"/>
 </p>
 
 <p align="center">
   <a href="https://www.apache.org/licenses/LICENSE-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License: Apache-2.0"></a>
   <a href="https://discord.gg/Hr4UWYEcTT"><img src="https://img.shields.io/badge/Discord-Join%20Server-7289DA?logo=discord&logoColor=white" alt="Discord"></a>
-  <a href="https://x.com/simstudioai"><img src="https://img.shields.io/twitter/follow/simstudioai?style=social" alt="Twitter"></a>
-  <a href="https://github.com/simstudioai/sim/pulls"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome"></a>
-  <a href="https://docs.simstudio.ai"><img src="https://img.shields.io/badge/Docs-visit%20documentation-blue.svg" alt="Documentation"></a>
+  <a href="https://x.com/gapcloudai"><img src="https://img.shields.io/twitter/follow/gapcloudai?style=social" alt="Twitter"></a>
+  <a href="https://github.com/gapcloudai/sim/pulls"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome"></a>
+  <a href="https://docs.gapcloud.ai"><img src="https://img.shields.io/badge/Docs-visit%20documentation-blue.svg" alt="Documentation"></a>
 </p>
 
 <p align="center">
-  <strong>Sim Studio</strong> is a lightweight, user-friendly platform for building AI agent workflows.
+  <strong>GapCloud Agent</strong> is a lightweight, user-friendly platform for building AI agent workflows.
 </p>
 
 ## Run
 
-1. Run on our [cloud-hosted version](https://simstudio.ai)
+1. Run on our [cloud-hosted version](https://gapcloud.ai)
 2. Self-host
 
 ## How to Self-Host
 
-There are several ways to self-host Sim Studio:
+There are several ways to self-host GapCloud Agent:
 
 ### Option 1: Docker Environment (Recommended)
 
@@ -33,12 +33,12 @@ cd sim
 # Create environment file and update with required environment variables (BETTER_AUTH_SECRET)
 cp .env.example .env
 
-# Start Sim Studio using the provided script
+# Start GapCloud Agent using the provided script
 docker compose up -d --build
 
 or
 
-./start_simstudio_docker.sh
+./start_gapcloud_docker.sh
 ```
 
 After running these commands:
@@ -52,10 +52,10 @@ After running these commands:
 
    ```bash
    # View application logs
-   docker compose logs -f simstudio
+   docker compose logs -f gapcloud
 
    # Access PostgreSQL database
-   docker compose exec db psql -U postgres -d simstudio
+   docker compose exec db psql -U postgres -d gapcloud
 
    # Stop the environment
    docker compose down
@@ -66,7 +66,7 @@ After running these commands:
 
 #### Working with Local Models
 
-To use local models with Sim Studio, follow these steps:
+To use local models with GapCloud Agent, follow these steps:
 
 1. **Pull Local Models**
 
@@ -75,20 +75,20 @@ To use local models with Sim Studio, follow these steps:
    ./apps/sim/scripts/ollama_docker.sh pull <model_name>
    ```
 
-2. **Start Sim Studio with Local Models**
+2. **Start GapCloud Agent with Local Models**
 
    ```bash
-   #Start Sim Studio with local model support
-   ./start_simstudio_docker.sh --local
+   #Start GapCloud Agent with local model support
+   ./start_gapcloud_docker.sh --local
 
    # or
 
-   # Start Sim Studio with local model support if you have nvidia GPU
+   # Start GapCloud Agent with local model support if you have nvidia GPU
    docker compose up --profile local-gpu -d --build
 
    # or
 
-   # Start Sim Studio with local model support if you don't have nvidia GPU
+   # Start GapCloud Agent with local model support if you don't have nvidia GPU
    docker compose up --profile local-cpu -d --build
    ```
 
@@ -108,7 +108,7 @@ Or modify your docker-compose.yml:
 ```yaml
 # Method 2: Add host.docker.internal mapping
 services:
-  simstudio:
+  gapcloud:
     # ... existing configuration ...
     extra_hosts:
       - 'host.docker.internal:host-gateway'
@@ -193,4 +193,4 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 
 ##
 
-<p align="center">Made with ❤️ by the Sim Studio Team</p>
+<p align="center">Made with ❤️ by the GapCloud Agent Team</p>

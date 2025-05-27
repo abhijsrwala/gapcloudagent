@@ -7,7 +7,7 @@ import { source } from '@/lib/source'
 const GitHubLink = () => (
   <div className="fixed bottom-4 right-4 z-50">
     <Link
-      href="https://github.com/simstudioai/sim"
+      href="https://github.com/gapcloudai/sim"
       target="_blank"
       rel="noopener noreferrer"
       className="flex items-center justify-center w-8 h-8 rounded-full bg-background border border-border hover:bg-muted transition-colors"
@@ -23,12 +23,12 @@ export default function Layout({ children }: { children: ReactNode }) {
       <DocsLayout
         tree={source.pageTree}
         nav={{
-          title: <div className="flex items-center font-medium">Sim Studio</div>,
+          title: <div className="flex items-center font-medium">GapCloud Agent</div>,
         }}
         links={[
           {
-            text: 'Visit Sim Studio',
-            url: 'https://simstudio.ai',
+            text: 'Visit GapCloud Agent',
+            url: 'https://gapcloud.ai',
             icon: <ExternalLink className="h-4 w-4" />,
           },
         ]}

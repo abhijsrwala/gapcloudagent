@@ -79,7 +79,7 @@ export const confluenceUpdateTool: ToolConfig<ConfluenceUpdateParams, Confluence
           : undefined,
         version: {
           number: params.version || 1,
-          message: params.version ? 'Updated via Sim Studio' : 'Initial update via Sim Studio',
+          message: params.version ? 'Updated via GapCloud Agent' : 'Initial update via GapCloud Agent',
         },
       }
       return body

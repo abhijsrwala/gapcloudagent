@@ -1,7 +1,7 @@
-version: '3.8'
+
 
 services:
-  simstudio:
+  gapcloud:
     build:
       context: .
       dockerfile: Dockerfile
@@ -16,8 +16,8 @@ services:
       - /app/apps/docs/.next
     environment:
       - NODE_ENV=development
-      - DATABASE_URL=postgresql://postgres:postgres@db:5432/simstudio
-      - POSTGRES_URL=postgresql://postgres:postgres@db:5432/simstudio
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/gapcloud
+      - POSTGRES_URL=postgresql://postgres:postgres@db:5432/gapcloud
       - BETTER_AUTH_URL=http://localhost:3000
       - NEXT_PUBLIC_APP_URL=http://localhost:3000
       - BETTER_AUTH_SECRET=your_auth_secret_here
@@ -40,7 +40,7 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=simstudio
+      - POSTGRES_DB=gapcloud
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:

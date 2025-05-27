@@ -70,8 +70,8 @@ export default function TermsOfService() {
               <section>
                 <p className="mb-4">Last Updated: April 20, 2025</p>
                 <p>
-                  Please read these Terms of Service ("Terms") carefully before using the Sim Studio
-                  platform (the "Service") operated by Sim Studio, Inc ("us", "we", or "our").
+                  Please read these Terms of Service ("Terms") carefully before using the GapCloud Agent
+                  platform (the "Service") operated by GapCloud Agent, Inc ("us", "we", or "our").
                 </p>
                 <p className="mt-4">
                   By accessing or using the Service, you agree to be bound by these Terms. If you
@@ -101,13 +101,13 @@ export default function TermsOfService() {
                 <h2 className="text-2xl font-semibold mb-4 text-white">2. Intellectual Property</h2>
                 <p className="mb-4">
                   The Service and its original content, features, and functionality are and will
-                  remain the exclusive property of Sim Studio, Inc and its licensors. The Service is
+                  remain the exclusive property of GapCloud Agent, Inc and its licensors. The Service is
                   protected by copyright, trademark, and other laws of both the United States and
                   foreign countries.
                 </p>
                 <p>
                   Our trademarks and trade dress may not be used in connection with any product or
-                  service without the prior written consent of Sim Studio, Inc.
+                  service without the prior written consent of GapCloud Agent, Inc.
                 </p>
               </section>
 
@@ -157,7 +157,7 @@ export default function TermsOfService() {
                     solicitation.
                   </li>
                   <li>
-                    To impersonate or attempt to impersonate Sim Studio, Inc, a Sim Studio employee,
+                    To impersonate or attempt to impersonate GapCloud Agent, Inc, a GapCloud Agent employee,
                     another user, or any other person or entity.
                   </li>
                   <li>
@@ -166,7 +166,7 @@ export default function TermsOfService() {
                   </li>
                   <li>
                     To engage in any other conduct that restricts or inhibits anyone's use or
-                    enjoyment of the Service, or which, as determined by us, may harm Sim Studio,
+                    enjoyment of the Service, or which, as determined by us, may harm GapCloud Agent,
                     Inc or users of the Service or expose them to liability.
                   </li>
                 </ul>
@@ -190,7 +190,7 @@ export default function TermsOfService() {
                   6. Limitation of Liability
                 </h2>
                 <p className="mb-4">
-                  In no event shall Sim Studio, Inc, nor its directors, employees, partners, agents,
+                  In no event shall GapCloud Agent, Inc, nor its directors, employees, partners, agents,
                   suppliers, or affiliates, be liable for any indirect, incidental, special,
                   consequential or punitive damages, including without limitation, loss of profits,
                   data, use, goodwill, or other intangible losses, resulting from:
@@ -217,7 +217,7 @@ export default function TermsOfService() {
                   or course of performance.
                 </p>
                 <p>
-                  Sim Studio, Inc, its subsidiaries, affiliates, and its licensors do not warrant
+                  GapCloud Agent, Inc, its subsidiaries, affiliates, and its licensors do not warrant
                   that:
                 </p>
                 <ul className="list-disc pl-6 space-y-2 mb-4 marker:text-[#B5A1D4]">
@@ -249,7 +249,7 @@ export default function TermsOfService() {
                 <h2 className="text-2xl font-semibold mb-4 text-white">9. Arbitration Agreement</h2>
                 <p className="mb-4">
                   Please read the following arbitration agreement carefully. It requires you to
-                  arbitrate disputes with Sim Studio, Inc, its parent companies, subsidiaries,
+                  arbitrate disputes with GapCloud Agent, Inc, its parent companies, subsidiaries,
                   affiliates, successors and assigns and all of their respective officers,
                   directors, employees, agents, and representatives (collectively, the{' '}
                   <span className="text-[#B5A1D4]">"Company Parties"</span>) and limits the manner
@@ -279,10 +279,10 @@ export default function TermsOfService() {
                   You have the right to opt out of the provisions of this Arbitration Agreement by
                   sending a timely written notice of your decision to opt out to:{' '}
                   <Link
-                    href="mailto:legal@simstudio.ai"
+                    href="mailto:legal@gapcloud.ai"
                     className="text-[#B5A1D4] hover:text-[#701ffc]"
                   >
-                    legal@simstudio.ai{' '}
+                    legal@gapcloud.ai{' '}
                   </Link>
                   within 30 days after first becoming subject to this Arbitration Agreement.
                 </p>
@@ -333,10 +333,10 @@ export default function TermsOfService() {
                 <p>
                   Our Copyright Agent can be reached at:{' '}
                   <Link
-                    href="mailto:copyright@simstudio.ai"
+                    href="mailto:copyright@gapcloud.ai"
                     className="text-[#B5A1D4] hover:text-[#701ffc]"
                   >
-                    copyright@simstudio.ai
+                    copyright@gapcloud.ai
                   </Link>
                 </p>
               </section>
@@ -346,10 +346,10 @@ export default function TermsOfService() {
                 <p>
                   If you have any questions about these Terms, please contact us at:{' '}
                   <Link
-                    href="mailto:legal@simstudio.ai"
+                    href="mailto:legal@gapcloud.ai"
                     className="text-[#B5A1D4] hover:text-[#701ffc]"
                   >
-                    legal@simstudio.ai
+                    legal@gapcloud.ai
                   </Link>
                 </p>
               </section>

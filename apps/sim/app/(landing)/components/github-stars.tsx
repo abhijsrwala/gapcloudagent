@@ -19,7 +19,7 @@ async function getGitHubStars() {
   const token = process.env.GITHUB_TOKEN
 
   try {
-    const response = await fetch('https://api.github.com/repos/simstudioai/sim', {
+    const response = await fetch('https://api.github.com/repos/gapcloudai/sim', {
       headers: {
         Accept: 'application/vnd.github+json',
         'X-GitHub-Api-Version': '2022-11-28',
@@ -47,7 +47,7 @@ export default async function GitHubStars() {
 
   return (
     <a
-      href="https://github.com/simstudioai/sim"
+      href="https://github.com/gapcloudai/sim"
       className="flex items-center gap-2 text-white/80 hover:text-white/100 p-1.5 rounded-md transition-colors duration-200"
       aria-label="GitHub"
       target="_blank"

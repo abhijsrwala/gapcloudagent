@@ -88,9 +88,9 @@ const NavLinks = ({
   const navigationLinks = [
     // { href: "/", label: "Marketplace" },
     ...(currentPath !== '/' ? [{ href: '/', label: 'Home' }] : []),
-    { href: 'https://docs.simstudio.ai/', label: 'Docs', external: true },
+    { href: 'https://docs.gapcloud.ai/', label: 'Docs', external: true },
     // { href: '/', label: 'Blog' },
-    { href: 'https://github.com/simstudioai/sim', label: 'Contributors', external: true },
+    { href: 'https://github.com/gapcloudai/sim', label: 'Contributors', external: true },
   ]
 
   // Common CSS class for navigation items

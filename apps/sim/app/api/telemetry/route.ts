@@ -84,7 +84,7 @@ async function forwardToCollector(data: any): Promise<boolean> {
     return false
   }
 
-  const endpoint = process.env.TELEMETRY_ENDPOINT || 'https://telemetry.simstudio.ai/v1/traces'
+  const endpoint = process.env.TELEMETRY_ENDPOINT || 'https://telemetry.gapcloud.ai/v1/traces'
   const timeout = parseInt(process.env.TELEMETRY_TIMEOUT || '') || DEFAULT_TIMEOUT
 
   try {

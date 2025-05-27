@@ -30,7 +30,7 @@ export const hotPostsTool: ToolConfig<HotPostsParams, RedditHotPostsResponse> = 
       `https://www.reddit.com/r/${params.subreddit}/hot.json?limit=${params.limit || 10}`,
     method: 'GET',
     headers: () => ({
-      'User-Agent': 'SimStudio/1.0.0',
+      'User-Agent': 'gapcloud/1.0.0',
       'Content-Type': 'application/json',
     }),
   },

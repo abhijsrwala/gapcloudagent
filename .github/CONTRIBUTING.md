@@ -1,9 +1,9 @@
-# Contributing to Sim Studio
+# Contributing to GapCloud Agent
 
-Thank you for your interest in contributing to Sim Studio! Our goal is to provide developers with a powerful, user-friendly platform for building, testing, and optimizing agentic workflows. We welcome contributions in all forms—from bug fixes and design improvements to brand-new features.
+Thank you for your interest in contributing to GapCloud Agent! Our goal is to provide developers with a powerful, user-friendly platform for building, testing, and optimizing agentic workflows. We welcome contributions in all forms—from bug fixes and design improvements to brand-new features.
 
 > **Project Overview:**  
-> Sim Studio is a monorepo using Turborepo, containing the main application (`apps/sim/`), documentation (`apps/docs/`), and shared packages (`packages/`). The main application is built with Next.js (app router), ReactFlow, Zustand, Shadcn, and Tailwind CSS. Please ensure your contributions follow our best practices for clarity, maintainability, and consistency.
+> GapCloud Agent is a monorepo using Turborepo, containing the main application (`apps/sim/`), documentation (`apps/docs/`), and shared packages (`packages/`). The main application is built with Next.js (app router), ReactFlow, Zustand, Shadcn, and Tailwind CSS. Please ensure your contributions follow our best practices for clarity, maintainability, and consistency.
 
 ---
 
@@ -150,8 +150,8 @@ Docker provides a consistent development environment with all dependencies pre-c
    Or use the convenience script which handles environment setup and migrations:
 
    ```bash
-   chmod +x scripts/start_simstudio_docker.sh
-   ./scripts/start_simstudio_docker.sh
+   chmod +x scripts/start_gapcloud_docker.sh
+   ./scripts/start_gapcloud_docker.sh
    ```
 
    This will:
@@ -164,7 +164,7 @@ Docker provides a consistent development environment with all dependencies pre-c
 3. **View Logs:**
 
    ```bash
-   docker compose logs -f simstudio
+   docker compose logs -f gapcloud
    ```
 
 4. **Make Your Changes:**
@@ -265,7 +265,7 @@ When working on email templates, you can preview them using a local email previe
 
 ## Adding New Blocks and Tools
 
-Sim Studio is built in a modular fashion where blocks and tools extend the platform's functionality. To maintain consistency and quality, please follow the guidelines below when adding a new block or tool.
+GapCloud Agent is built in a modular fashion where blocks and tools extend the platform's functionality. To maintain consistency and quality, please follow the guidelines below when adding a new block or tool.
 
 ### Where to Add Your Code
 
@@ -435,7 +435,7 @@ This project is licensed under the Apache License 2.0. By contributing, you agre
 
 By contributing to this repository, you agree that your contributions are provided under the terms of the Apache License Version 2.0, as included in the LICENSE file of this repository.
 
-In addition, by submitting your contributions, you grant Sim Studio, Inc. ("The Licensor") a perpetual, irrevocable, worldwide, royalty-free, sublicensable right and license to:
+In addition, by submitting your contributions, you grant GapCloud Agent, Inc. ("The Licensor") a perpetual, irrevocable, worldwide, royalty-free, sublicensable right and license to:
 
 - Use, copy, modify, distribute, publicly display, publicly perform, and prepare derivative works of your contributions.
 - Incorporate your contributions into other works or products.
@@ -447,4 +447,4 @@ If you do not agree with these terms, you must not contribute your work to this 
 
 ---
 
-Thank you for taking the time to contribute to Sim Studio. We truly appreciate your efforts and look forward to collaborating with you!
+Thank you for taking the time to contribute to GapCloud Agent. We truly appreciate your efforts and look forward to collaborating with you!

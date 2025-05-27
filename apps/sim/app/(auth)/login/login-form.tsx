@@ -210,7 +210,7 @@ export default function LoginPage({
       {/* Ensure NotificationList is always rendered */}
       <NotificationList />
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h1 className="text-2xl font-bold text-center mb-8">Sim Studio</h1>
+        <h1 className="text-2xl font-bold text-center mb-8">GapCloud Agent</h1>
         <Card className="w-full">
           <CardHeader>
             <CardTitle>Welcome back</CardTitle>

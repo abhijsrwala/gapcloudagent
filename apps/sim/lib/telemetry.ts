@@ -1,5 +1,5 @@
 /**
- * Sim Studio Telemetry
+ * GapCloud Agent Telemetry
  *
  * This file can be customized in forked repositories:
  * - Set TELEMETRY_ENDPOINT in telemetry.config.ts to your collector
@@ -25,10 +25,10 @@ export type TelemetryStatus = {
   notifiedUser: boolean
 }
 
-const TELEMETRY_STATUS_KEY = 'simstudio-telemetry-status'
+const TELEMETRY_STATUS_KEY = 'gapcloud-telemetry-status'
 
 let telemetryConfig = {
-  endpoint: process.env.TELEMETRY_ENDPOINT || 'https://telemetry.simstudio.ai/v1/traces',
+  endpoint: process.env.TELEMETRY_ENDPOINT || 'https://telemetry.gapcloud.ai/v1/traces',
   serviceName: 'sim-studio',
   serviceVersion: process.env.NEXT_PUBLIC_APP_VERSION || '0.1.0',
 }

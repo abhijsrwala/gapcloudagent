@@ -44,7 +44,7 @@ export const getCommentsTool: ToolConfig<RedditCommentsParams, RedditCommentsRes
     },
     method: 'GET',
     headers: () => ({
-      'User-Agent': 'Sim Studio Reddit Tool/1.0',
+      'User-Agent': 'GapCloud Agent Reddit Tool/1.0',
     }),
   },
 

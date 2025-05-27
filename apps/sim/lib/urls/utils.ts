@@ -23,7 +23,7 @@ export function getBaseUrl(): string {
 
 /**
  * Returns just the domain and port part of the application URL
- * @returns The domain with port if applicable (e.g., 'localhost:3000' or 'simstudio.ai')
+ * @returns The domain with port if applicable (e.g., 'localhost:3000' or 'gapcloud.ai')
  */
 export function getBaseDomain(): string {
   try {
@@ -31,6 +31,6 @@ export function getBaseDomain(): string {
     return url.host // host includes port if specified
   } catch (e) {
     const isProd = process.env.NODE_ENV === 'production'
-    return isProd ? 'simstudio.ai' : 'localhost:3000'
+    return isProd ? 'gapcloud.ai' : 'localhost:3000'
   }
 }

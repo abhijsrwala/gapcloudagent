@@ -3,8 +3,8 @@ import PasswordAuth from '../password-auth'
 import { WaitlistTable } from './waitlist'
 
 export const metadata: Metadata = {
-  title: 'Waitlist Management | Sim Studio',
-  description: 'Manage the waitlist for Sim Studio',
+  title: 'Waitlist Management | GapCloud Agent',
+  description: 'Manage the waitlist for GapCloud Agent',
 }
 
 export default function WaitlistPage() {

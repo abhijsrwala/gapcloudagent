@@ -588,7 +588,7 @@ export function TeamManagement() {
                 <label className="text-sm font-medium">Team URL</label>
                 <div className="flex items-center space-x-2">
                   <div className="bg-muted px-3 py-2 rounded-l-md text-sm text-muted-foreground">
-                    simstudio.ai/team/
+                    gapcloud.ai/team/
                   </div>
                   <Input
                     value={orgSlug}

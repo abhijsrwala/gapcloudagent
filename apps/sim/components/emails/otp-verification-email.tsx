@@ -21,20 +21,20 @@ interface OTPVerificationEmailProps {
   chatTitle?: string
 }
 
-const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://simstudio.ai'
+const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://gapcloud.ai'
 
 const getSubjectByType = (type: string, chatTitle?: string) => {
   switch (type) {
     case 'sign-in':
-      return 'Sign in to Sim Studio'
+      return 'Sign in to GapCloud Agent'
     case 'email-verification':
-      return 'Verify your email for Sim Studio'
+      return 'Verify your email for GapCloud Agent'
     case 'forget-password':
-      return 'Reset your Sim Studio password'
+      return 'Reset your GapCloud Agent password'
     case 'chat-access':
       return `Verification code for ${chatTitle || 'Chat'}`
     default:
-      return 'Verification code for Sim Studio'
+      return 'Verification code for GapCloud Agent'
   }
 }
 
@@ -48,13 +48,13 @@ export const OTPVerificationEmail = ({
   const getMessage = () => {
     switch (type) {
       case 'sign-in':
-        return 'Sign in to Sim Studio'
+        return 'Sign in to GapCloud Agent'
       case 'forget-password':
-        return 'Reset your password for Sim Studio'
+        return 'Reset your password for GapCloud Agent'
       case 'chat-access':
         return `Access ${chatTitle || 'the chat'}`
       default:
-        return 'Welcome to Sim Studio'
+        return 'Welcome to GapCloud Agent'
     }
   }
 
@@ -70,7 +70,7 @@ export const OTPVerificationEmail = ({
                 <Img
                   src={`${baseUrl}/static/sim.png`}
                   width="114"
-                  alt="Sim Studio"
+                  alt="GapCloud Agent"
                   style={{
                     margin: '0 auto',
                   }}
@@ -98,7 +98,7 @@ export const OTPVerificationEmail = ({
             <Text style={baseStyles.paragraph}>
               Best regards,
               <br />
-              The Sim Studio Team
+              The GapCloud Agent Team
             </Text>
           </Section>
         </Container>

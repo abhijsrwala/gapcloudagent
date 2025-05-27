@@ -48,7 +48,7 @@ function Footer({ onOpenTypeformLink }: FooterProps) {
               {/* See repo button positioned absolutely to align with the top text - desktop only */}
               <div className="absolute top-0 right-0 md:block hidden">
                 <Link
-                  href="https://github.com/simstudioai/sim"
+                  href="https://github.com/gapcloudai/sim"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -67,7 +67,7 @@ function Footer({ onOpenTypeformLink }: FooterProps) {
               <div className="flex flex-row justify-between md:justify-start w-full md:w-auto gap-4 md:gap-16">
                 <div className="flex flex-col gap-2">
                   <Link
-                    href={'https://docs.simstudio.ai/'}
+                    href={'https://docs.gapcloud.ai/'}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-xl md:text-2xl text-[#9E91AA] font-light hover:text-[#bdaecb] transition-all duration-500"
@@ -75,7 +75,7 @@ function Footer({ onOpenTypeformLink }: FooterProps) {
                     Docs
                   </Link>
                   <Link
-                    href={'https://github.com/simstudioai/sim'}
+                    href={'https://github.com/gapcloudai/sim'}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-xl md:text-2xl text-[#9E91AA] font-light hover:text-[#bdaecb] transition-all duration-500"
@@ -107,7 +107,7 @@ function Footer({ onOpenTypeformLink }: FooterProps) {
               <div className="flex md:justify-end items-center mt-4 md:mt-0">
                 <div className="flex gap-4">
                   <Link
-                    href={'https://github.com/simstudioai/sim'}
+                    href={'https://github.com/gapcloudai/sim'}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex md:hidden text-2xl transition-all duration-500"
@@ -137,7 +137,7 @@ function Footer({ onOpenTypeformLink }: FooterProps) {
                     <DiscordIcon className="fill-[#9E91AA] hover:fill-[#bdaecb] w-9 h-9 md:w-10 md:h-10" />
                   </Link>
                   <Link
-                    href={'https://x.com/simstudioai'}
+                    href={'https://x.com/gapcloudai'}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-2xl transition-all duration-500"
@@ -221,7 +221,7 @@ function Footer({ onOpenTypeformLink }: FooterProps) {
               transition={{ duration: 0.7, delay: 0.4, ease: 'easeOut' }}
             >
               <Link
-                href="https://github.com/simstudioai/sim"
+                href="https://github.com/gapcloudai/sim"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -246,7 +246,7 @@ function Footer({ onOpenTypeformLink }: FooterProps) {
                 transition={{ duration: 0.7, delay: 0.32, ease: 'easeOut' }}
               >
                 <Link
-                  href={'https://docs.simstudio.ai/'}
+                  href={'https://docs.gapcloud.ai/'}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-xl md:text-2xl text-[#9E91AA] font-light hover:text-[#bdaecb] transition-all duration-500"
@@ -254,7 +254,7 @@ function Footer({ onOpenTypeformLink }: FooterProps) {
                   Docs
                 </Link>
                 <Link
-                  href={'https://github.com/simstudioai/sim'}
+                  href={'https://github.com/gapcloudai/sim'}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-xl md:text-2xl text-[#9E91AA] font-light hover:text-[#bdaecb] transition-all duration-500"
@@ -298,7 +298,7 @@ function Footer({ onOpenTypeformLink }: FooterProps) {
             >
               <div className="flex gap-4">
                 <Link
-                  href={'https://github.com/simstudioai/sim'}
+                  href={'https://github.com/gapcloudai/sim'}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex md:hidden text-2xl transition-all duration-500"
@@ -328,7 +328,7 @@ function Footer({ onOpenTypeformLink }: FooterProps) {
                   <DiscordIcon className="fill-[#9E91AA] hover:fill-[#bdaecb] w-9 h-9 md:w-10 md:h-10" />
                 </Link>
                 <Link
-                  href={'https://x.com/simstudioai'}
+                  href={'https://x.com/gapcloudai'}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-2xl transition-all duration-500"

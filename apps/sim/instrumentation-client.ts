@@ -1,5 +1,5 @@
 /**
- * Sim Studio Telemetry - Client-side Instrumentation
+ * GapCloud Agent Telemetry - Client-side Instrumentation
  *
  * This file initializes client-side telemetry when the app loads in the browser.
  * It respects the user's telemetry preferences stored in localStorage.
@@ -43,7 +43,7 @@ export const onRouterTransitionStart =
   process.env.NODE_ENV === 'production' ? captureRouterTransitionStart : () => {}
 
 if (typeof window !== 'undefined') {
-  const TELEMETRY_STATUS_KEY = 'simstudio-telemetry-status'
+  const TELEMETRY_STATUS_KEY = 'gapcloud-telemetry-status'
   let telemetryEnabled = true
 
   try {

@@ -40,7 +40,7 @@ export async function sendEmail({
   from,
 }: EmailOptions): Promise<SendEmailResult> {
   try {
-    const senderEmail = from || 'noreply@simstudio.ai'
+    const senderEmail = from || 'noreply@gapcloud.ai'
 
     if (!resend) {
       logger.info('Email not sent (Resend not configured):', {
@@ -56,7 +56,7 @@ export async function sendEmail({
     }
 
     const { data, error } = await resend.emails.send({
-      from: `Sim Studio <${senderEmail}>`,
+      from: `GapCloud Agent <${senderEmail}>`,
       to,
       subject,
       html,
@@ -88,7 +88,7 @@ export async function sendBatchEmails({
   emails,
 }: BatchEmailOptions): Promise<BatchSendEmailResult> {
   try {
-    const senderEmail = 'noreply@simstudio.ai'
+    const senderEmail = 'noreply@gapcloud.ai'
     const results: SendEmailResult[] = []
 
     if (!resend) {
@@ -115,7 +115,7 @@ export async function sendBatchEmails({
 
     // Prepare emails for batch sending
     const batchEmails = emails.map((email) => ({
-      from: `Sim Studio <${email.from || senderEmail}>`,
+      from: `GapCloud Agent <${email.from || senderEmail}>`,
       to: email.to,
       subject: email.subject,
       html: email.html,

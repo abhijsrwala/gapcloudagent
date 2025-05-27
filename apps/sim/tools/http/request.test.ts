@@ -114,7 +114,7 @@ describe('HTTP Request Tool', () => {
       Object.defineProperty(global, 'window', {
         value: {
           location: {
-            origin: 'https://app.simstudio.dev',
+            origin: 'https://app.gapcloud.dev',
           },
         },
         writable: true,
@@ -131,7 +131,7 @@ describe('HTTP Request Tool', () => {
 
       // Verify the Referer header was set
       const fetchCall = (global.fetch as any).mock.calls[0]
-      expect(fetchCall[1].headers.Referer).toBe('https://app.simstudio.dev')
+      expect(fetchCall[1].headers.Referer).toBe('https://app.gapcloud.dev')
 
       // Reset window
       global.window = originalWindow
@@ -174,7 +174,7 @@ describe('HTTP Request Tool', () => {
       Object.defineProperty(global, 'window', {
         value: {
           location: {
-            origin: 'https://app.simstudio.dev',
+            origin: 'https://app.gapcloud.dev',
           },
         },
         writable: true,
@@ -192,7 +192,7 @@ describe('HTTP Request Tool', () => {
 
       // Check specific header values
       expect(headers['Host']).toBe('api.example.com')
-      expect(headers['Referer']).toBe('https://app.simstudio.dev')
+      expect(headers['Referer']).toBe('https://app.gapcloud.dev')
       expect(headers['User-Agent']).toContain('Mozilla')
       expect(headers['Accept']).toBe('*/*')
       expect(headers['Accept-Encoding']).toContain('gzip')
@@ -369,7 +369,7 @@ describe('HTTP Request Tool', () => {
       Object.defineProperty(global, 'window', {
         value: {
           location: {
-            origin: 'https://app.simstudio.dev',
+            origin: 'https://app.gapcloud.dev',
           },
         },
         writable: true,
@@ -394,7 +394,7 @@ describe('HTTP Request Tool', () => {
       expect(headers['Sec-Ch-Ua']).toMatch(/Chromium.*Not-A\.Brand/)
       expect(headers['Sec-Ch-Ua-Mobile']).toBe('?0')
       expect(headers['Sec-Ch-Ua-Platform']).toBe('"macOS"')
-      expect(headers['Referer']).toBe('https://app.simstudio.dev')
+      expect(headers['Referer']).toBe('https://app.gapcloud.dev')
       expect(headers['Host']).toBe('api.example.com')
 
       // Reset window
@@ -438,7 +438,7 @@ describe('HTTP Request Tool', () => {
       Object.defineProperty(global, 'window', {
         value: {
           location: {
-            origin: 'https://app.simstudio.dev',
+            origin: 'https://app.gapcloud.dev',
           },
         },
         writable: true,

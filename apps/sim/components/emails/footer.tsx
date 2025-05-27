@@ -6,7 +6,7 @@ interface EmailFooterProps {
 }
 
 export const EmailFooter = ({
-  baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://simstudio.ai',
+  baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://gapcloud.ai',
 }: EmailFooterProps) => {
   return (
     <Container>
@@ -17,7 +17,7 @@ export const EmailFooter = ({
               <table cellPadding={0} cellSpacing={0} style={{ border: 0 }}>
                 <tr>
                   <td align="center" style={{ padding: '0 8px' }}>
-                    <Link href="https://x.com/simstudioai" rel="noopener noreferrer">
+                    <Link href="https://x.com/gapcloudai" rel="noopener noreferrer">
                       <Img src={`${baseUrl}/static/x-icon.png`} width="24" height="24" alt="X" />
                     </Link>
                   </td>
@@ -32,7 +32,7 @@ export const EmailFooter = ({
                     </Link>
                   </td>
                   <td align="center" style={{ padding: '0 8px' }}>
-                    <Link href="https://github.com/simstudioai/sim" rel="noopener noreferrer">
+                    <Link href="https://github.com/gapcloudai/sim" rel="noopener noreferrer">
                       <Img
                         src={`${baseUrl}/static/github-icon.png`}
                         width="24"
@@ -54,11 +54,11 @@ export const EmailFooter = ({
                   margin: '8px 0 0 0',
                 }}
               >
-                © {new Date().getFullYear()} Sim Studio, All Rights Reserved
+                © {new Date().getFullYear()} GapCloud Agent, All Rights Reserved
                 <br />
                 If you have any questions, please contact us at{' '}
                 <a
-                  href="mailto:help@simstudio.ai"
+                  href="mailto:help@gapcloud.ai"
                   style={{
                     color: '#706a7b !important',
                     textDecoration: 'underline',
@@ -66,7 +66,7 @@ export const EmailFooter = ({
                     fontFamily: 'HelveticaNeue, Helvetica, Arial, sans-serif',
                   }}
                 >
-                  help@simstudio.ai
+                  help@gapcloud.ai
                 </a>
               </Text>
               <table cellPadding={0} cellSpacing={0} style={{ width: '100%', marginTop: '4px' }}>

@@ -74,7 +74,7 @@ export async function GET(_request: NextRequest, { params }: { params: Promise<{
 
     const chatUrl = isDevelopment
       ? `http://${chatInstance[0].subdomain}.${getBaseDomain()}`
-      : `https://${chatInstance[0].subdomain}.simstudio.ai`
+      : `https://${chatInstance[0].subdomain}.gapcloud.ai`
 
     const result = {
       ...safeData,
@@ -224,7 +224,7 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
 
       const chatUrl = isDevelopment
         ? `http://${updatedSubdomain}.${getBaseDomain()}`
-        : `https://${updatedSubdomain}.simstudio.ai`
+        : `https://${updatedSubdomain}.gapcloud.ai`
 
       logger.info(`Chat "${chatId}" updated successfully`)
 

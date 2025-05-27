@@ -12,7 +12,7 @@ cat > package.json << EOF
 {
   "name": "sim-doc-generator",
   "version": "1.0.0",
-  "description": "Documentation generator for Sim Studio blocks",
+  "description": "Documentation generator for GapCloud Agent blocks",
   "type": "module",
   "private": true
 }

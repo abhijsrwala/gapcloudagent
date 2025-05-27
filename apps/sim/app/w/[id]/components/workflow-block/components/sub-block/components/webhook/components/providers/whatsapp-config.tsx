@@ -89,7 +89,7 @@ export function WhatsAppConfig({
         <AlertTitle>Requirements</AlertTitle>
         <AlertDescription>
           <ul className="list-disc list-outside pl-4 space-y-1 mt-1">
-            <li>Your Sim Studio webhook URL must use HTTPS and be publicly accessible.</li>
+            <li>Your GapCloud Agent webhook URL must use HTTPS and be publicly accessible.</li>
             <li>Self-signed SSL certificates are not supported by WhatsApp.</li>
             <li>For local testing, use a tunneling service like ngrok or Cloudflare Tunnel.</li>
           </ul>

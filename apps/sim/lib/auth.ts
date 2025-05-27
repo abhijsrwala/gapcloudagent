@@ -146,7 +146,7 @@ export const auth = betterAuth({
       const html = await renderPasswordResetEmail(username, url)
 
       const result = await resend.emails.send({
-        from: 'Sim Studio <team@simstudio.ai>',
+        from: 'GapCloud Agent <team@gapcloud.ai>',
         to: user.email,
         subject: getEmailSubject('reset-password'),
         html,
@@ -184,7 +184,7 @@ export const auth = betterAuth({
 
           // In production, send an actual email
           const result = await resend.emails.send({
-            from: 'Sim Studio <onboarding@simstudio.ai>',
+            from: 'GapCloud Agent <onboarding@gapcloud.ai>',
             to: data.email,
             subject: getEmailSubject(data.type),
             html,
@@ -888,9 +888,9 @@ export const auth = betterAuth({
                 )
 
                 await resend.emails.send({
-                  from: 'Sim Studio <team@simstudio.ai>',
+                  from: 'GapCloud Agent <team@gapcloud.ai>',
                   to: invitation.email,
-                  subject: `${inviterName} has invited you to join ${organization.name} on Sim Studio`,
+                  subject: `${inviterName} has invited you to join ${organization.name} on GapCloud Agent`,
                   html,
                 })
               } catch (error) {

@@ -171,7 +171,7 @@ export async function POST(request: NextRequest) {
       const isDevelopment = process.env.NODE_ENV === 'development'
       const chatUrl = isDevelopment
         ? `http://${subdomain}.localhost:3000`
-        : `https://${subdomain}.simstudio.ai`
+        : `https://${subdomain}.gapcloud.ai`
 
       logger.info(`Chat "${title}" deployed successfully at ${chatUrl}`)
 

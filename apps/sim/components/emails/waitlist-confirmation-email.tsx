@@ -19,7 +19,7 @@ interface WaitlistConfirmationEmailProps {
   email?: string
 }
 
-const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://simstudio.ai'
+const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://gapcloud.ai'
 const typeformLink = 'https://form.typeform.com/to/jqCO12pF'
 
 export const WaitlistConfirmationEmail = ({ email = '' }: WaitlistConfirmationEmailProps) => {
@@ -27,7 +27,7 @@ export const WaitlistConfirmationEmail = ({ email = '' }: WaitlistConfirmationEm
     <Html>
       <Head />
       <Body style={baseStyles.main}>
-        <Preview>Welcome to the Sim Studio Waitlist!</Preview>
+        <Preview>Welcome to the GapCloud Agent Waitlist!</Preview>
         <Container style={baseStyles.container}>
           <Section style={{ padding: '30px 0', textAlign: 'center' }}>
             <Row>
@@ -35,7 +35,7 @@ export const WaitlistConfirmationEmail = ({ email = '' }: WaitlistConfirmationEm
                 <Img
                   src={`${baseUrl}/static/sim.png`}
                   width="114"
-                  alt="Sim Studio"
+                  alt="GapCloud Agent"
                   style={{
                     margin: '0 auto',
                   }}
@@ -53,14 +53,14 @@ export const WaitlistConfirmationEmail = ({ email = '' }: WaitlistConfirmationEm
           </Section>
 
           <Section style={baseStyles.content}>
-            <Text style={baseStyles.paragraph}>Welcome to the Sim Studio Waitlist!</Text>
+            <Text style={baseStyles.paragraph}>Welcome to the GapCloud Agent Waitlist!</Text>
             <Text style={baseStyles.paragraph}>
-              Thank you for your interest in Sim Studio. We've added your email ({email}) to our
+              Thank you for your interest in GapCloud Agent. We've added your email ({email}) to our
               waitlist and will notify you as soon as you're granted access.
             </Text>
             <Text style={baseStyles.paragraph}>
               <strong>Want to get access sooner?</strong> Tell us about your use case! Schedule a
-              15-minute call with our team to discuss how you plan to use Sim Studio.
+              15-minute call with our team to discuss how you plan to use GapCloud Agent.
             </Text>
             <Link href={typeformLink} style={{ textDecoration: 'none' }}>
               <Text style={baseStyles.button}>Schedule a Call</Text>
@@ -71,7 +71,7 @@ export const WaitlistConfirmationEmail = ({ email = '' }: WaitlistConfirmationEm
             <Text style={baseStyles.paragraph}>
               Best regards,
               <br />
-              The Sim Studio Team
+              The GapCloud Agent Team
             </Text>
           </Section>
         </Container>

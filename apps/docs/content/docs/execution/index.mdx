@@ -1,6 +1,6 @@
 ---
 title: Execution
-description: Understand how workflows are executed in Sim Studio
+description: Understand how workflows are executed in GapCloud Agent
 ---
 
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion'
@@ -24,7 +24,7 @@ import {
   SlackIcon,
 } from '@/components/icons'
 
-Sim Studio provides a powerful execution engine that brings your workflows to life. Understanding how execution works will help you design more effective workflows and troubleshoot any issues that arise.
+GapCloud Agent provides a powerful execution engine that brings your workflows to life. Understanding how execution works will help you design more effective workflows and troubleshoot any issues that arise.
 
 <div>
   <video autoPlay loop muted playsInline className="w-full" src="/loops.mp4"></video>
@@ -61,11 +61,11 @@ Sim Studio provides a powerful execution engine that brings your workflows to li
 - **Real-time Monitoring** - Watch your workflow execute with detailed logs and visual indicators
 - **Error Handling** - Robust error management keeps your workflows resilient
 
-Whether you're building simple automations or complex AI workflows, understanding execution is key to creating effective solutions in Sim Studio.
+Whether you're building simple automations or complex AI workflows, understanding execution is key to creating effective solutions in GapCloud Agent.
 
 ## Execution Flow
 
-When you execute a workflow in Sim Studio, the system follows a predictable pattern:
+When you execute a workflow in GapCloud Agent, the system follows a predictable pattern:
 
 <Steps>
   <Step>
@@ -104,7 +104,7 @@ When you execute a workflow in Sim Studio, the system follows a predictable patt
 
 ## Block Types
 
-Sim Studio has two main categories of blocks in workflows:
+GapCloud Agent has two main categories of blocks in workflows:
 
 <Tabs items={['Orchestration Blocks', 'Output Blocks']}>
   <Tab value="Orchestration Blocks">
@@ -156,7 +156,7 @@ Sim Studio has two main categories of blocks in workflows:
 
 ## Real-Time Monitoring
 
-As your workflow executes, Sim Studio provides powerful real-time monitoring capabilities:
+As your workflow executes, GapCloud Agent provides powerful real-time monitoring capabilities:
 
 <Accordions>
   <Accordion title="Active Block Indicator">
@@ -187,11 +187,11 @@ As your workflow executes, Sim Studio provides powerful real-time monitoring cap
 
 ## Execution Methods
 
-Sim Studio offers multiple ways to trigger workflow execution:
+GapCloud Agent offers multiple ways to trigger workflow execution:
 
 <Cards>
   <Card title="Manual Execution" href="#">
-    Run workflows on-demand through the Sim Studio interface. This is perfect for testing and
+    Run workflows on-demand through the GapCloud Agent interface. This is perfect for testing and
     development, allowing you to iteratively refine your workflow with immediate feedback.
   </Card>
 
@@ -218,7 +218,7 @@ Sim Studio offers multiple ways to trigger workflow execution:
 
 ### Loops
 
-Sim Studio supports sophisticated loop constructs, allowing parts of your workflow to execute repeatedly:
+GapCloud Agent supports sophisticated loop constructs, allowing parts of your workflow to execute repeatedly:
 
 - **Iteration Limits** - Configure maximum iterations (default: 5) to prevent infinite loops and minimum iterations to ensure the loop executes a certain number of times.
 - **Conditional Looping** - Continue looping until specific conditions are met, with the loop manager tracking iteration counts.
@@ -262,4 +262,4 @@ Each workflow execution maintains a detailed context that includes:
 - **Code Optimization** - For function blocks, optimize your code to reduce execution time and resource usage.
 - **Timeout Limits** - Function blocks have configurable timeout limits to prevent long-running operations from blocking execution.
 
-By understanding these execution principles, you can design more efficient and effective workflows in Sim Studio.
+By understanding these execution principles, you can design more efficient and effective workflows in GapCloud Agent.

@@ -20,7 +20,7 @@ interface WaitlistApprovalEmailProps {
   signupLink?: string
 }
 
-const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://simstudio.ai'
+const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://gapcloud.ai'
 
 export const WaitlistApprovalEmail = ({
   email = '',
@@ -30,7 +30,7 @@ export const WaitlistApprovalEmail = ({
     <Html>
       <Head />
       <Body style={baseStyles.main}>
-        <Preview>You've Been Approved to Join Sim Studio!</Preview>
+        <Preview>You've Been Approved to Join GapCloud Agent!</Preview>
         <Container style={baseStyles.container}>
           <Section style={{ padding: '30px 0', textAlign: 'center' }}>
             <Row>
@@ -38,7 +38,7 @@ export const WaitlistApprovalEmail = ({
                 <Img
                   src={`${baseUrl}/static/sim.png`}
                   width="114"
-                  alt="Sim Studio"
+                  alt="GapCloud Agent"
                   style={{
                     margin: '0 auto',
                   }}
@@ -58,12 +58,12 @@ export const WaitlistApprovalEmail = ({
           <Section style={baseStyles.content}>
             <Text style={baseStyles.paragraph}>Great news!</Text>
             <Text style={baseStyles.paragraph}>
-              You've been approved to join Sim Studio! We're excited to have you as part of our
+              You've been approved to join GapCloud Agent! We're excited to have you as part of our
               community of developers building, testing, and optimizing AI workflows.
             </Text>
             <Text style={baseStyles.paragraph}>
               Your email ({email}) has been approved. Click the button below to create your account
-              and start using Sim Studio today:
+              and start using GapCloud Agent today:
             </Text>
             <Link href={signupLink} style={{ textDecoration: 'none' }}>
               <Text style={baseStyles.button}>Create Your Account</Text>
@@ -75,7 +75,7 @@ export const WaitlistApprovalEmail = ({
             <Text style={baseStyles.paragraph}>
               Best regards,
               <br />
-              The Sim Studio Team
+              The GapCloud Agent Team
             </Text>
           </Section>
         </Container>

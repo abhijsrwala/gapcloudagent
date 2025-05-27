@@ -125,7 +125,7 @@ export function AirtableConfig({
         <ol className="list-decimal list-inside space-y-1">
           <li>Ensure you have provided the correct Base ID and Table ID above.</li>
           <li>
-            Sim Studio will automatically configure the webhook in your Airtable account when you
+            GapCloud Agent will automatically configure the webhook in your Airtable account when you
             save.
           </li>
           <li>Any changes made to records in the specified table will trigger this workflow.</li>

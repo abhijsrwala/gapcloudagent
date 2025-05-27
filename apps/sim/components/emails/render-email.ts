@@ -78,20 +78,20 @@ export function getEmailSubject(
 ): string {
   switch (type) {
     case 'sign-in':
-      return 'Sign in to Sim Studio'
+      return 'Sign in to GapCloud Agent'
     case 'email-verification':
-      return 'Verify your email for Sim Studio'
+      return 'Verify your email for GapCloud Agent'
     case 'forget-password':
-      return 'Reset your Sim Studio password'
+      return 'Reset your GapCloud Agent password'
     case 'reset-password':
-      return 'Reset your Sim Studio password'
+      return 'Reset your GapCloud Agent password'
     case 'waitlist-confirmation':
-      return 'Welcome to the Sim Studio Waitlist'
+      return 'Welcome to the GapCloud Agent Waitlist'
     case 'waitlist-approval':
-      return "You've Been Approved to Join Sim Studio!"
+      return "You've Been Approved to Join GapCloud Agent!"
     case 'invitation':
-      return "You've been invited to join a team on Sim Studio"
+      return "You've been invited to join a team on GapCloud Agent"
     default:
-      return 'Sim Studio'
+      return 'GapCloud Agent'
   }
 }

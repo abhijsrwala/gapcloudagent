@@ -3,7 +3,7 @@
 # Exit on error, but with some error handling
 set -e
 
-echo "🔧 Setting up Sim Studio development environment..."
+echo "🔧 Setting up GapCloud Agent development environment..."
 
 # Change to the workspace root directory
 cd /workspace
@@ -34,7 +34,7 @@ if [ ! -f "apps/sim/.env" ]; then
   if [ -f "apps/sim/.env.example" ]; then
     cp apps/sim/.env.example apps/sim/.env
   else
-    echo "DATABASE_URL=postgresql://postgres:postgres@db:5432/simstudio" > apps/sim/.env
+    echo "DATABASE_URL=postgresql://postgres:postgres@db:5432/gapcloud" > apps/sim/.env
   fi
 fi
 
@@ -53,7 +53,7 @@ echo "Waiting for database to be ready..."
     if PGPASSWORD=postgres psql -h db -U postgres -c '\q' 2>/dev/null; then
       echo "Database is ready!"
       cd apps/sim
-      DATABASE_URL=postgresql://postgres:postgres@db:5432/simstudio npx drizzle-kit push
+      DATABASE_URL=postgresql://postgres:postgres@db:5432/gapcloud npx drizzle-kit push
       cd ../..
       break
     fi
@@ -70,8 +70,8 @@ echo "Waiting for database to be ready..."
 # Add additional helpful aliases to .bashrc
 cat << EOF >> ~/.bashrc
 
-# Additional Sim Studio Development Aliases
-alias migrate="cd /workspace/apps/sim && DATABASE_URL=postgresql://postgres:postgres@db:5432/simstudio npx drizzle-kit push"
+# Additional GapCloud Agent Development Aliases
+alias migrate="cd /workspace/apps/sim && DATABASE_URL=postgresql://postgres:postgres@db:5432/gapcloud npx drizzle-kit push"
 alias generate="cd /workspace/apps/sim && npx drizzle-kit generate"
 alias dev="cd /workspace && npm run dev"
 alias build="cd /workspace && npm run build"
@@ -88,7 +88,7 @@ unset SIM_WELCOME_SHOWN
 
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "✅ Sim Studio development environment setup complete!"
+echo "✅ GapCloud Agent development environment setup complete!"
 echo ""
 echo "Your environment is now ready. A new terminal session will show"
 echo "available commands. You can start the development server with:"

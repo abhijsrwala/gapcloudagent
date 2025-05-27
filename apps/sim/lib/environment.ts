@@ -20,7 +20,7 @@ export const isTest = process.env.NODE_ENV === 'test'
 /**
  * Is this the hosted version of the application
  */
-export const isHosted = process.env.NEXT_PUBLIC_APP_URL === 'https://www.simstudio.ai'
+export const isHosted = process.env.NEXT_PUBLIC_APP_URL === 'https://www.gapcloud.ai'
 
 /**
  * Get cost multiplier based on environment

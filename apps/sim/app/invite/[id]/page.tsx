@@ -136,7 +136,7 @@ export default function InvitePage() {
             <CardTitle>You've been invited to join a team</CardTitle>
             <CardDescription>
               {isNewUser
-                ? 'Create an account to join this team on Sim Studio'
+                ? 'Create an account to join this team on GapCloud Agent'
                 : 'Sign in to your account to accept this invitation'}
             </CardDescription>
           </CardHeader>

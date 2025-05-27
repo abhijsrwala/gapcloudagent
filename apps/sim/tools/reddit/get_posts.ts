@@ -51,7 +51,7 @@ export const getPostsTool: ToolConfig<RedditPostsParams, RedditPostsResponse> = 
     },
     method: 'GET',
     headers: () => ({
-      'User-Agent': 'Sim Studio Reddit Tool/1.0',
+      'User-Agent': 'GapCloud Agent Reddit Tool/1.0',
     }),
   },
 

@@ -1,6 +1,6 @@
 {
-  "name": "Sim Studio",
-  "short_name": "Sim Studio",
+  "name": "GapCloud Agent",
+  "short_name": "GapCloud Agent",
   "icons": [
     {
       "src": "/favicon/android-chrome-192x192.png",

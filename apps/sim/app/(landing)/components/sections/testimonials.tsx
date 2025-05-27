@@ -35,14 +35,14 @@ const X_TESTIMONIALS = [
     profileImage: '/twitter/nizzy.jpg',
   },
   {
-    text: "One of the best products I've seen in the space, and the hustle and grind I've seen from @karabegemir and @typingwala is insane. Sim Studio is positioned to build something game-changing, and there's no better team for the job.\n\nCongrats on the launch 🚀 🎊 great things ahead!",
+    text: "One of the best products I've seen in the space, and the hustle and grind I've seen from @karabegemir and @typingwala is insane. GapCloud Agent is positioned to build something game-changing, and there's no better team for the job.\n\nCongrats on the launch 🚀 🎊 great things ahead!",
     username: '@firestorm776',
     viewCount: '956',
     tweetUrl: 'https://x.com/firestorm776/status/1907896097735061598',
     profileImage: '/twitter/samarth.jpg',
   },
   {
-    text: 'lfgg got access to @simstudioai via @zerodotemail 😎',
+    text: 'lfgg got access to @gapcloudai via @zerodotemail 😎',
     username: '@nizzyabi',
     viewCount: '1,585',
     tweetUrl: 'https://x.com/nizzyabi/status/1910482357821595944',
@@ -63,7 +63,7 @@ const X_TESTIMONIALS = [
     profileImage: '/twitter/lazukars.png',
   },
   {
-    text: 'The use cases are endless. Great work @simstudioai',
+    text: 'The use cases are endless. Great work @gapcloudai',
     username: '@daniel_zkim',
     viewCount: '103',
     tweetUrl: 'https://x.com/daniel_zkim/status/1907891273664782708',

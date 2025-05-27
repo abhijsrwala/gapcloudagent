@@ -2,13 +2,13 @@
 
 /**
  * Storage detection helper that determines if we should use local storage
- * This is used when running via the CLI with `npx simstudio`
+ * This is used when running via the CLI with `npx gapcloud`
  */
 
 // Check if we should use local storage based on environment variable
 export const useLocalStorage = () => {
   // In client components, check for the environment variable in localStorage
-  // This is set by the CLI when running with `npx simstudio`
+  // This is set by the CLI when running with `npx gapcloud`
   if (typeof window !== 'undefined') {
     return localStorage.getItem('USE_LOCAL_STORAGE') === 'true'
   }
