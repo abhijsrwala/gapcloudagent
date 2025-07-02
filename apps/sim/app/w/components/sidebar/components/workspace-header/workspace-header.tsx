@@ -487,14 +487,15 @@ export function WorkspaceHeader({
 
           {/* Content with consistent padding */}
           {isCollapsed ? (
-            <div className="flex items-center justify-center px-2 py-[6px] relative z-10">
-              <Link
-                href={workspaceUrl}
-                className="group flex h-6 w-6 shrink-0 items-center justify-center rounded bg-[#802FFF]"
-              >
-                <AgentIcon className="text-white transition-all group-hover:scale-105 -translate-y-[0.5px] w-[18px] h-[18px]" />
-              </Link>
-            </div>
+            // <div className="flex items-center justify-center px-2 py-[6px] relative z-10">
+            //   <Link
+            //     href={workspaceUrl}
+            //     className="group flex h-6 w-6 shrink-0 items-center justify-center rounded bg-[#802FFF]"
+            //   >
+            //     <AgentIcon className="text-white transition-all group-hover:scale-105 -translate-y-[0.5px] w-[18px] h-[18px]" />
+            //   </Link>
+            // </div>
+            <div> </div>
           ) : (
             <div className="relative">
               <DropdownMenuTrigger asChild>
@@ -503,7 +504,7 @@ export function WorkspaceHeader({
                   onClick={handleTriggerClick}
                 >
                   <div className="flex items-center gap-2 overflow-hidden cursor-pointer">
-                    <Link
+                    {/* <Link
                       href={workspaceUrl}
                       className="group flex h-6 w-6 shrink-0 items-center justify-center rounded bg-[#802FFF]"
                       onClick={(e) => {
@@ -511,7 +512,7 @@ export function WorkspaceHeader({
                       }}
                     >
                       <AgentIcon className="text-white transition-all group-hover:scale-105 -translate-y-[0.5px] w-[18px] h-[18px]" />
-                    </Link>
+                    </Link> */}
                     {isClientLoading || isWorkspacesLoading ? (
                       <Skeleton className="h-4 w-[140px]" />
                     ) : (
@@ -560,9 +561,9 @@ export function WorkspaceHeader({
           <div className="space-y-3">
             <div className="flex items-center justify-between p-1">
               <div className="flex items-center gap-2">
-                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded bg-[#802FFF]">
+                {/* <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded bg-[#802FFF]">
                   <AgentIcon className="text-white w-5 h-5" />
-                </div>
+                </div> */}
                 <div className="flex flex-col max-w-full">
                   {isClientLoading || isWorkspacesLoading ? (
                     <>
@@ -574,7 +575,7 @@ export function WorkspaceHeader({
                       <span className="text-sm font-medium truncate">
                         {activeWorkspace?.name || `${userName}'s Workspace`}
                       </span>
-                      <span className="text-xs text-muted-foreground">{plan}</span>
+                      {/* <span className="text-xs text-muted-foreground">{plan}</span> */}
                     </>
                   )}
                 </div>

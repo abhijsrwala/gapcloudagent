@@ -1,0 +1,153 @@
+# Dynamics 365 CRM
+
+The Microsoft Dynamics 365 CRM integration enables your agents to interact with Dynamics 365 records programmatically. This allows for powerful automation scenarios such as managing customer records, leads, opportunities, and other CRM data. Your agents can create, retrieve, update, and delete records in your Dynamics 365 instance, enabling seamless integration with your CRM workflows.
+
+## Authentication and Credentials
+
+To use the Dynamics 365 CRM integration, you'll need the following credentials:
+
+1. **Organization URL**
+   - Format: `https://your-org.crm.dynamics.com`
+   - How to get it:
+     1. Log in to Dynamics 365
+     2. Look at your browser's address bar
+     3. Copy the base URL (everything before `/main.aspx`)
+
+2. **Azure AD App Registration**
+   1. Go to [Azure Portal](https://portal.azure.com)
+   2. Navigate to "Azure Active Directory" → "App registrations"
+   3. Click "New registration"
+   4. Fill in the details:
+      - Name: Your app name
+      - Supported account types: "Accounts in this organizational directory only"
+      - Redirect URI: Your application's callback URL
+   5. After registration, note down:
+      - Application (client) ID
+      - Directory (tenant) ID
+
+3. **Required API Permissions**
+   1. In your App registration, go to "API permissions"
+   2. Add "Dynamics CRM" permissions:
+      - `user_impersonation` (Required)
+      - `offline_access` (For refresh tokens)
+   3. Click "Grant admin consent"
+
+4. **Client Secret**
+   1. In your App registration, go to "Certificates & secrets"
+   2. Create a new client secret
+   3. Copy the secret value immediately (it won't be shown again)
+
+5. **OAuth Configuration**
+   - Auth URL: `https://login.microsoftonline.com/{tenant-id}/oauth2/v2.0/authorize`
+   - Token URL: `https://login.microsoftonline.com/{tenant-id}/oauth2/v2.0/token`
+   - Scope: `https://org589a2042.crm8.dynamics.com/.default offline_access`
+
+## Security Best Practices
+
+1. Store credentials securely using environment variables or a secure vault
+2. Never hardcode the client secret in your code
+3. Rotate client secrets periodically
+4. Use minimum required permissions
+5. Enable audit logging for security monitoring
+
+## Usage Instructions
+
+Integrate Dynamics 365 CRM functionality to manage records within your workflow. Automate CRM operations and process record data using OAuth authentication.
+
+## Tools
+
+### `dynamics365_create`
+
+Create a new record in Dynamics 365 CRM
+
+#### Input
+
+| Parameter        | Type   | Required | Description                                           |
+| --------------- | ------ | -------- | ----------------------------------------------------- |
+| `accessToken`   | string | Yes      | OAuth access token for Dynamics 365                   |
+| `organizationUrl`| string | Yes      | Your Dynamics 365 organization URL                    |
+| `entityType`    | string | Yes      | The entity type to create (e.g., accounts, contacts) |
+| `data`          | object | Yes      | The data for the new record                          |
+
+#### Output
+
+| Parameter  | Type   | Description                |
+| ---------- | ------ | -------------------------- |
+| `content`  | string | Operation result message   |
+| `metadata` | object | Created record details     |
+
+### `dynamics365_retrieve`
+
+Retrieve records from Dynamics 365 CRM
+
+#### Input
+
+| Parameter        | Type    | Required | Description                                           |
+| --------------- | ------- | -------- | ----------------------------------------------------- |
+| `accessToken`   | string  | Yes      | OAuth access token for Dynamics 365                   |
+| `organizationUrl`| string  | Yes      | Your Dynamics 365 organization URL                    |
+| `entityType`    | string  | Yes      | The entity type to retrieve                          |
+| `id`           | string  | No       | Specific record ID to retrieve                        |
+| `select`       | array   | No       | Fields to select in the response                      |
+| `filter`       | string  | No       | OData filter query                                    |
+| `maxResults`   | number  | No       | Maximum number of records to retrieve                 |
+
+#### Output
+
+| Parameter  | Type   | Description                |
+| ---------- | ------ | -------------------------- |
+| `content`  | string | Operation result message   |
+| `metadata` | object | Retrieved record(s) details |
+
+### `dynamics365_update`
+
+Update a record in Dynamics 365 CRM
+
+#### Input
+
+| Parameter        | Type   | Required | Description                                           |
+| --------------- | ------ | -------- | ----------------------------------------------------- |
+| `accessToken`   | string | Yes      | OAuth access token for Dynamics 365                   |
+| `organizationUrl`| string | Yes      | Your Dynamics 365 organization URL                    |
+| `entityType`    | string | Yes      | The entity type to update                            |
+| `id`           | string | Yes      | ID of the record to update                           |
+| `data`         | object | Yes      | The data to update in the record                     |
+
+#### Output
+
+| Parameter  | Type   | Description                |
+| ---------- | ------ | -------------------------- |
+| `content`  | string | Operation result message   |
+| `metadata` | object | Updated record details     |
+
+### `dynamics365_delete`
+
+Delete a record from Dynamics 365 CRM
+
+#### Input
+
+| Parameter        | Type   | Required | Description                                           |
+| --------------- | ------ | -------- | ----------------------------------------------------- |
+| `accessToken`   | string | Yes      | OAuth access token for Dynamics 365                   |
+| `organizationUrl`| string | Yes      | Your Dynamics 365 organization URL                    |
+| `entityType`    | string | Yes      | The entity type to delete                            |
+| `id`           | string | Yes      | ID of the record to delete                           |
+
+#### Output
+
+| Parameter  | Type   | Description                |
+| ---------- | ------ | -------------------------- |
+| `content`  | string | Operation result message   |
+| `metadata` | object | Deletion status            |
+
+### `dynamics365_sales`
+
+Retrieve sales, payment, and pipeline information from Dynamics 365 CRM
+
+#### Input
+
+| Parameter        | Type   | Required | Description                                           |
+| --------------- | ------ | -------- | ----------------------------------------------------- |
+| `accessToken`   | string | Yes      | OAuth access token for Dynamics 365                   |
+| `organizationUrl`| string | Yes      | Your Dynamics 365 organization URL                    |
+| `operation`

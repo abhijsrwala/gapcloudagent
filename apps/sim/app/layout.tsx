@@ -109,17 +109,17 @@ export const metadata: Metadata = {
     site: '@gapcloud',
   },
   manifest: '/favicon/site.webmanifest',
-  icons: {
-    icon: [
-      { url: '/favicon/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/favicon/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-      { url: '/favicon/favicon-192x192.png', sizes: '192x192', type: 'image/png' },
-      { url: '/favicon/favicon-512x512.png', sizes: '512x512', type: 'image/png' },
-      { url: '/sim.png', sizes: 'any', type: 'image/png' },
-    ],
-    apple: '/favicon/apple-touch-icon.png',
-    shortcut: '/favicon/favicon.ico',
-  },
+  // icons: {
+  //   icon: [
+  //     { url: '/favicon/', sizes: '16x16', type: 'image/png' },
+  //     { url: '/favicon/', sizes: '32x32', type: 'image/png' },
+  //     { url: '/favicon/', sizes: '192x192', type: 'image/png' },
+  //     { url: '/favicon/', sizes: '512x512', type: 'image/png' },
+  //     { url: '/', sizes: 'any', type: 'image/png' },
+  //   ],
+  //   apple: '/favicon/',
+  //   shortcut: '/favicon/',
+  // },
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',

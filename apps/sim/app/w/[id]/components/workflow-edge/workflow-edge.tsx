@@ -33,9 +33,8 @@ export const WorkflowEdge = ({
         data-testid="workflow-edge"
         style={{
           strokeWidth: 2,
-          stroke: isSelected ? '#475569' : '#94a3b8',
-          strokeDasharray: '5,5',
-          zIndex: -10,
+          stroke: '#404040',
+          zIndex: 5,
         }}
         interactionWidth={20}
       />

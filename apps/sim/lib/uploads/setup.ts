@@ -12,7 +12,7 @@ const PROJECT_ROOT = path.resolve(process.cwd())
 // Define the upload directory path using project root
 export const UPLOAD_DIR = join(PROJECT_ROOT, 'uploads')
 
-export const USE_S3_STORAGE = process.env.NODE_ENV === 'production' || process.env.USE_S3 === 'true'
+export const USE_S3_STORAGE = true
 
 export const S3_CONFIG = {
   bucket: process.env.S3_BUCKET_NAME || '',

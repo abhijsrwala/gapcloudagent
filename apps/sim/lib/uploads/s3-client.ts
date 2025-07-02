@@ -9,7 +9,7 @@ import { S3_CONFIG } from './setup'
 
 // Create an S3 client
 export const s3Client = new S3Client({
-  region: S3_CONFIG.region || '',
+  region: S3_CONFIG.region || 'us-east-1', // Default to us-east-1 if not set
   credentials: {
     accessKeyId: process.env.AWS_ACCESS_KEY_ID || '',
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || '',
@@ -43,11 +43,16 @@ export async function uploadToS3(
 ): Promise<FileInfo> {
   // Create a unique filename with timestamp to prevent collisions
   // Use a simple timestamp without directory structure
+  try{
+
+  if(!S3_CONFIG.bucket || !S3_CONFIG.region) {
+    throw new Error('S3 bucket and region must be configured in S3_CONFIG')
+  } 
   const safeFileName = fileName.replace(/\s+/g, '-') // Replace spaces with hyphens
   const uniqueKey = `${Date.now()}-${safeFileName}`
-
+  console.log(`Uploading file to S3 with key: ${uniqueKey}`)
   // Upload the file to S3
-  await s3Client.send(
+  const response= await s3Client.send(
     new PutObjectCommand({
       Bucket: S3_CONFIG.bucket,
       Key: uniqueKey,
@@ -60,9 +65,11 @@ export async function uploadToS3(
       },
     })
   )
+  console.log('S3 upload response:', response)
 
   // Create a path for API to serve the file
   const servePath = `/api/files/serve/s3/${encodeURIComponent(uniqueKey)}`
+  console.log(`File will be served from: ${servePath}`)
 
   return {
     path: servePath,
@@ -70,6 +77,10 @@ export async function uploadToS3(
     name: fileName,
     size: size ?? file.length,
     type: contentType,
+  }
+} catch (error) {
+  console.error('Error uploading file to S3:', error)
+  throw new Error(`Failed to upload file: ${error instanceof Error ? error.message : 'Unknown error'}`)
   }
 }
 
@@ -94,6 +105,7 @@ export async function getPresignedUrl(key: string, expiresIn = 3600) {
  * @returns File buffer
  */
 export async function downloadFromS3(key: string) {
+  try{
   const command = new GetObjectCommand({
     Bucket: S3_CONFIG.bucket,
     Key: key,
@@ -109,6 +121,10 @@ export async function downloadFromS3(key: string) {
     stream.on('end', () => resolve(Buffer.concat(chunks)))
     stream.on('error', reject)
   })
+} catch (error) {
+  console.error('Error downloading file from S3:', error)
+  throw new Error(`Failed to download file: ${error instanceof Error ? error.message : 'Unknown error'}`)
+  }
 }
 
 /**

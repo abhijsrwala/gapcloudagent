@@ -13,6 +13,7 @@ import {
   renderOTPEmail,
   renderPasswordResetEmail,
 } from '@/components/emails/render-email'
+import { refreshOAuthToken } from '@/lib/oauth'
 import { createLogger } from '@/lib/logs/console-logger'
 import { db } from '@/db'
 import * as schema from '@/db/schema'
@@ -53,6 +54,19 @@ const resend = validResendAPIKEY
         },
       },
     }
+
+    function decodeJWT(token: string) {
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(
+        atob(base64)
+          .split('')
+          .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+          .join('')
+      );
+      return JSON.parse(jsonPayload);
+    }
+
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
@@ -116,6 +130,7 @@ export const auth = betterAuth({
         'supabase',
         'x',
         'notion',
+        'dynamics365'
       ],
     },
   },
@@ -661,6 +676,145 @@ export const auth = betterAuth({
               }
             } catch (error) {
               logger.error('Error in Notion getUserInfo:', { error })
+              return null
+            }
+          },
+        },
+
+        // Dynamics 365 provider
+        {
+          providerId: 'dynamics365',
+          clientId: process.env.DYNAMICS_CLIENT_ID as string,
+          clientSecret: process.env.DYNAMICS_CLIENT_SECRET as string,
+          authorizationUrl: `https://login.microsoftonline.com/${process.env.DYNAMICS_TENANT_ID || 'organizations'}/oauth2/v2.0/authorize`,
+          tokenUrl: `https://login.microsoftonline.com/${process.env.DYNAMICS_TENANT_ID || 'organizations'}/oauth2/token?resource=https://org589a2042.crm8.dynamics.com`,
+          userInfoUrl: `https://org589a2042.crm8.dynamics.com/api/data/v9.0/WhoAmI`,
+          scopes: [
+            'https://org589a2042.crm8.dynamics.com/.default',
+            'offline_access',
+          ],
+          accessType: 'offline',
+          prompt: 'consent',
+          redirectURI: `${process.env.NEXT_PUBLIC_APP_URL}/api/auth/oauth2/callback/dynamics365`,
+          getUserInfo: async (tokens) => {
+            try {
+              logger.info('Attempting to fetch Dynamics 365 user info', {
+                hasAccessToken: !!tokens.accessToken,
+                hasRefreshToken: !!tokens.refreshToken,
+                tokenLength: tokens.accessToken?.length
+              })
+
+              if (tokens.accessToken) {
+                const decodedToken = decodeJWT(tokens.accessToken);
+                logger.debug('Decoded token:', decodedToken);
+              }
+
+              // Try to get user info from Microsoft CRM API
+              const response = await fetch('https://org589a2042.crm8.dynamics.com/api/data/v9.0/WhoAmI', {
+                headers: {
+                  'Authorization': `Bearer ${tokens.accessToken}`,
+                  'Accept': 'application/json',
+                },
+              })
+
+
+              if (!response.ok) {
+                logger.error('Error fetching Dynamics 365 user info from CRM API:', {
+                  status: response.status,
+                  statusText: response.statusText,
+                  headers: Object.fromEntries(response.headers.entries())
+                })
+
+                // Try to get error details
+                const errorText = await response.text()
+                logger.error('CRM API error details:', {
+                  error: errorText
+                })
+
+                // If token is expired, try to refresh
+                if (response.status === 401 && tokens.refreshToken) {
+                  logger.info('Attempting to refresh token')
+                  try {
+                    const refreshResult = await refreshOAuthToken('dynamics365', tokens.refreshToken)
+                    if (refreshResult?.accessToken) {
+                      logger.info('Token refreshed successfully, retrying user info fetch')
+                      // Retry with new token
+                      const retryResponse = await fetch('https://org589a2042.crm8.dynamics.com/api/data/v9.0/WhoAmI', {
+                        headers: {
+                          'Authorization': `Bearer ${refreshResult.accessToken}`,
+                          'Accept': 'application/json',
+                        },
+                      })
+
+                      if (retryResponse.ok) {
+                        const profile = await retryResponse.json()
+                        logger.info('Successfully fetched user info after token refresh')
+                        const now = new Date()
+                        return {
+                          id: profile.id,
+                          name: profile.displayName || profile.userPrincipalName || 'Dynamics 365 User',
+                          email: profile.userPrincipalName || profile.mail,
+                          image: null,
+                          emailVerified: true,
+                          createdAt: now,
+                          updatedAt: now,
+                        }
+                      } else {
+                        logger.error('Retry failed after token refresh:', {
+                          status: retryResponse.status,
+                          statusText: retryResponse.statusText
+                        })
+                      }
+                    } else {
+                      logger.error('Token refresh failed - no new access token received')
+                    }
+                  } catch (refreshError) {
+                    logger.error('Error refreshing token:', { refreshError })
+                  }
+                }
+                return null
+              }
+
+              const profile = await response.json()
+              logger.debug('WhoAmI response:', profile)
+
+              const userId = profile?.UserId
+              if (!userId) {
+                logger.error('Missing UserId in WhoAmI response')
+                return null
+              }
+
+              const userDetailsResponse = await fetch(`https://org589a2042.crm8.dynamics.com/api/data/v9.0/systemusers(${userId})?$select=fullname,domainname,internalemailaddress`, {
+                headers: {
+                  'Authorization': `Bearer ${tokens.accessToken}`,
+                  'Accept': 'application/json',
+                  'OData-MaxVersion': '4.0',
+                  'OData-Version': '4.0'
+                },
+              })
+
+              if (!userDetailsResponse.ok) {
+                logger.error('Failed to fetch user details from systemusers table', {
+                  status: userDetailsResponse.status,
+                  body: await userDetailsResponse.text()
+                })
+                return null
+              }
+
+              const userDetails = await userDetailsResponse.json()
+
+              const now = new Date()
+              return {
+                id: userId,
+                name: userDetails.fullname || userDetails.domainname || 'Dynamics 365 User',
+                email: userDetails.internalemailaddress || userDetails.domainname,
+                image: null,
+                emailVerified: true,
+                createdAt: now,
+                updatedAt: now,
+              }
+            } catch (error) {
+              logger.error('Error in Dynamics 365 getUserInfo:', { error })
               return null
             }
           },

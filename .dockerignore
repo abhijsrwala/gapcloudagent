@@ -5,8 +5,6 @@ node_modules
 .next
 .vercel
 .husky
-.env
-.env.*
 npm-debug.log
 README.md
 .devcontainer 

@@ -3,16 +3,19 @@ import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
 import { getBlock } from '@/blocks'
 import { resolveOutputType } from '@/blocks/utils'
+import { createLogger } from '@/lib/logs/console-logger'
 import { pushHistory, withHistory, WorkflowStoreWithHistory } from '../middleware'
-import { saveWorkflowState } from '../persistence'
+import { saveWorkflowState, saveSubblockValues } from '../persistence'
 import { useWorkflowRegistry } from '../registry/store'
 import { useSubBlockStore } from '../subblock/store'
 import { workflowSync } from '../sync'
 import { mergeSubblockState } from '../utils'
-import { Loop, Position, SubBlockState, WorkflowState } from './types'
+import { BlockState, Loop, Position, SubBlockState, WorkflowState } from './types'
 import { detectCycle } from './utils'
 
-const initialState = {
+const logger = createLogger('WorkflowStore')
+
+export const initialState = {
   blocks: {},
   edges: [],
   loops: {},
@@ -34,15 +37,121 @@ const initialState = {
   },
 }
 
+const validateBlockState = (block: Partial<BlockState>): boolean => {
+  if (!block) return false;
+  if (!block.id || typeof block.id !== 'string') return false;
+  if (!block.type || typeof block.type !== 'string') return false;
+  if (!block.name || typeof block.name !== 'string') return false;
+  if (!block.position || typeof block.position !== 'object') return false;
+  if (!block.subBlocks || typeof block.subBlocks !== 'object') return false;
+  if (!block.outputs || typeof block.outputs !== 'object') return false;
+  if (typeof block.enabled !== 'boolean') return false;
+  return true;
+}
+
+const cleanupInvalidBlocks = (blocks: Record<string, BlockState>): Record<string, BlockState> => {
+  const validBlocks: Record<string, BlockState> = {};
+  
+  Object.entries(blocks).forEach(([id, block]) => {
+    if (validateBlockState(block)) {
+      validBlocks[id] = block;
+    } else {
+      logger.warn(`Removing invalid block: ${id}`, { block });
+    }
+  });
+  
+  return validBlocks;
+};
+
 export const useWorkflowStore = create<WorkflowStoreWithHistory>()(
   devtools(
     withHistory((set, get) => ({
       ...initialState,
-      undo: () => {},
-      redo: () => {},
-      canUndo: () => false,
-      canRedo: () => false,
-      revertToHistoryState: () => {},
+      undo: () => {
+        const { history } = get()
+        if (history.past.length === 0) return
+
+        const previous = history.past[history.past.length - 1]
+        const newPast = history.past.slice(0, history.past.length - 1)
+
+        set({
+          ...previous.state,
+          history: {
+            past: newPast,
+            present: previous,
+            future: [history.present, ...history.future],
+          },
+        })
+      },
+      redo: () => {
+        const { history } = get()
+        if (history.future.length === 0) return
+
+        const next = history.future[0]
+        const newFuture = history.future.slice(1)
+
+        set({
+          ...next.state,
+          history: {
+            past: [...history.past, history.present],
+            present: next,
+            future: newFuture,
+          },
+        })
+      },
+      canUndo: () => get().history.past.length > 0,
+      canRedo: () => get().history.future.length > 0,
+      revertToHistoryState: (index: number) => {
+        const { history, ...state } = get()
+        const allStates = [...history.past, history.present, ...history.future]
+        const targetState = allStates[index]
+
+        if (!targetState) return
+
+        const newPast = allStates.slice(0, index)
+        const newFuture = allStates.slice(index + 1)
+
+        set({
+          ...state,
+          ...targetState.state,
+          history: {
+            past: newPast,
+            present: targetState,
+            future: newFuture,
+          },
+          lastSaved: Date.now(),
+        })
+
+        // Get active workflow ID for subblock handling
+        const activeWorkflowId = useWorkflowRegistry.getState().activeWorkflowId
+        if (!activeWorkflowId) return
+
+        // Restore subblock values from the target state's snapshot
+        if (targetState.subblockValues && activeWorkflowId) {
+          // Update the subblock store with the saved values
+          useSubBlockStore.setState({
+            workflowValues: {
+              ...useSubBlockStore.getState().workflowValues,
+              [activeWorkflowId]: targetState.subblockValues,
+            },
+          })
+
+          // Save to localStorage
+          saveSubblockValues(activeWorkflowId, targetState.subblockValues)
+        }
+
+        // Save workflow state after revert
+        const currentState = get()
+        saveWorkflowState(activeWorkflowId, {
+          blocks: currentState.blocks,
+          edges: currentState.edges,
+          loops: currentState.loops,
+          history: currentState.history,
+          isDeployed: currentState.isDeployed,
+          deployedAt: currentState.deployedAt,
+          lastSaved: Date.now(),
+        })
+      },
 
       setNeedsRedeploymentFlag: (needsRedeployment: boolean) => {
         set({ needsRedeployment })
@@ -50,7 +159,10 @@ export const useWorkflowStore = create<WorkflowStoreWithHistory>()(
 
       addBlock: (id: string, type: string, name: string, position: Position) => {
         const blockConfig = getBlock(type)
-        if (!blockConfig) return
+        if (!blockConfig) {
+          logger.error(`Invalid block type: ${type}`);
+          return;
+        }
 
         const subBlocks: Record<string, SubBlockState> = {}
         blockConfig.subBlocks.forEach((subBlock) => {
@@ -64,21 +176,28 @@ export const useWorkflowStore = create<WorkflowStoreWithHistory>()(
 
         const outputs = resolveOutputType(blockConfig.outputs, subBlocks)
 
+        const newBlock: BlockState = {
+          id,
+          type,
+          name,
+          position,
+          subBlocks,
+          outputs,
+          enabled: true,
+          horizontalHandles: true,
+          isWide: false,
+          height: 0,
+        }
+
+        if (!validateBlockState(newBlock)) {
+          logger.error('Invalid block state:', newBlock);
+          return;
+        }
+
         const newState = {
           blocks: {
             ...get().blocks,
-            [id]: {
-              id,
-              type,
-              name,
-              position,
-              subBlocks,
-              outputs,
-              enabled: true,
-              horizontalHandles: true,
-              isWide: false,
-              height: 0,
-            },
+            [id]: newBlock,
           },
           edges: [...get().edges],
           loops: { ...get().loops },
@@ -718,6 +837,31 @@ export const useWorkflowStore = create<WorkflowStoreWithHistory>()(
         pushHistory(set, get, newState, 'Reverted to deployed state')
         get().updateLastSaved()
         workflowSync.sync()
+      },
+
+      cleanupInvalidBlocks: () => {
+        const currentState = get();
+        const cleanedBlocks = cleanupInvalidBlocks(currentState.blocks);
+        
+        // Remove any edges connected to removed blocks
+        const cleanedEdges = currentState.edges.filter(edge => 
+          cleanedBlocks[edge.source] && cleanedBlocks[edge.target]
+        );
+
+        // Only update if we actually removed blocks or edges
+        if (Object.keys(cleanedBlocks).length !== Object.keys(currentState.blocks).length ||
+            cleanedEdges.length !== currentState.edges.length) {
+          const newState = {
+            ...currentState,
+            blocks: cleanedBlocks,
+            edges: cleanedEdges,
+          };
+          
+          set(newState);
+          pushHistory(set, get, newState, 'Cleaned up invalid blocks and connections');
+          get().updateLastSaved();
+          workflowSync.sync();
+        }
       },
     })),
     { name: 'workflow-store' }

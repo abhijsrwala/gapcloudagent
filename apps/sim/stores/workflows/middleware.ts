@@ -2,7 +2,7 @@ import { StateCreator } from 'zustand'
 import { saveSubblockValues, saveWorkflowState } from './persistence'
 import { useWorkflowRegistry } from './registry/store'
 import { useSubBlockStore } from './subblock/store'
-import { WorkflowState, WorkflowStore } from './workflow/types'
+import { WorkflowState, WorkflowStore, WorkflowActions } from './workflow/types'
 
 // Types
 interface HistoryEntry {
@@ -30,9 +30,10 @@ interface HistoryActions {
 const MAX_HISTORY_LENGTH = 20
 
 // Types for workflow store with history management capabilities
-export interface WorkflowStoreWithHistory extends WorkflowStore, HistoryActions {
+export interface WorkflowStoreWithHistory extends WorkflowState, WorkflowActions, HistoryActions {
   history: WorkflowHistory
   revertToDeployedState: (deployedState: WorkflowState) => void
+  cleanupInvalidBlocks: () => void
 }
 
 // Higher-order store middleware that adds undo/redo functionality

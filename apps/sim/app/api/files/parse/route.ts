@@ -88,6 +88,7 @@ const binaryExtensions = [
  * Main API route handler
  */
 export async function POST(request: NextRequest) {
+  console.log('Files parse API request received')
   try {
     const requestData = await request.json()
     const { filePath, fileType } = requestData

@@ -64,6 +64,14 @@ import { visionTool } from './vision'
 import { whatsappSendMessageTool } from './whatsapp'
 import { xReadTool, xSearchTool, xUserTool, xWriteTool } from './x'
 import { youtubeSearchTool } from './youtube'
+import {
+  dynamics365CreateTool,
+  dynamics365DeleteTool,
+  dynamics365RetrieveTool,
+  dynamics365UpdateTool,
+  dynamics365SalesTool,
+  dynamics365LeadsTool,
+} from './dynamics365'
 
 // Registry of all available tools
 export const tools: Record<string, ToolConfig> = {
@@ -152,4 +160,10 @@ export const tools: Record<string, ToolConfig> = {
   s3_get_object: s3GetObjectTool,
   telegram_message: telegramMessageTool,
   clay_populate: clayPopulateTool,
+  dynamics365_create: dynamics365CreateTool,
+  dynamics365_retrieve: dynamics365RetrieveTool,
+  dynamics365_update: dynamics365UpdateTool,
+  dynamics365_delete: dynamics365DeleteTool,
+  dynamics365_sales: dynamics365SalesTool,
+  dynamics365_leads: dynamics365LeadsTool,
 }

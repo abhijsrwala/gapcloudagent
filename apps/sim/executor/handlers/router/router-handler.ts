@@ -8,6 +8,18 @@ import { BlockHandler, ExecutionContext } from '../../types'
 
 const logger = createLogger('RouterBlockHandler')
 
+interface TargetBlock {
+  id: string
+  type: string
+  title: string
+  description?: string
+  subBlocks: {
+    systemPrompt: string
+    [key: string]: any
+  }
+  currentState?: any
+}
+
 /**
  * Handler for Router blocks that dynamically select execution paths.
  */
@@ -21,23 +33,52 @@ export class RouterBlockHandler implements BlockHandler {
     return block.metadata?.id === 'router'
   }
 
+  private validateRouterConfiguration(block: SerializedBlock, context: ExecutionContext): void {
+    // Check if the router has any outgoing connections
+    const outgoingConnections = context.workflow?.connections.filter(conn => conn.source === block.id);
+    if (!outgoingConnections || outgoingConnections.length === 0) {
+      throw new Error(`Router block ${block.id} has no outgoing connections`);
+    }
+
+    // Validate that all target blocks exist and are enabled
+    outgoingConnections.forEach(conn => {
+      const targetBlock = context.workflow?.blocks.find(b => b.id === conn.target);
+      if (!targetBlock) {
+        throw new Error(`Target block ${conn.target} not found for router ${block.id}`);
+      }
+      if (!targetBlock.enabled) {
+        throw new Error(`Target block ${conn.target} is disabled for router ${block.id}`);
+      }
+    });
+  }
+
   async execute(
     block: SerializedBlock,
     inputs: Record<string, any>,
     context: ExecutionContext
   ): Promise<BlockOutput> {
-    const targetBlocks = this.getTargetBlocks(block, context)
-
-    const routerConfig = {
-      prompt: inputs.prompt,
-      model: inputs.model || 'gpt-4o',
-      apiKey: inputs.apiKey,
-      temperature: inputs.temperature || 0,
-    }
-
-    const providerId = getProviderFromModel(routerConfig.model)
-
     try {
+      // Validate router configuration before execution
+      this.validateRouterConfiguration(block, context);
+
+      const targetBlocks = this.getTargetBlocks(block, context)
+      if (!targetBlocks || targetBlocks.length === 0) {
+        throw new Error(`Router block ${block.id} has no valid target blocks`);
+      }
+
+      const routerConfig = {
+        prompt: inputs.prompt,
+        model: inputs.model || 'gpt-4o',
+        apiKey: inputs.apiKey,
+        temperature: inputs.temperature || 0,
+      }
+
+      if (!routerConfig.prompt) {
+        throw new Error('Router prompt is required');
+      }
+
+      const providerId = getProviderFromModel(routerConfig.model)
+
       const baseUrl = process.env.NEXT_PUBLIC_APP_URL || ''
       const url = new URL('/api/providers', baseUrl)
 
@@ -63,7 +104,6 @@ export class RouterBlockHandler implements BlockHandler {
       })
 
       if (!response.ok) {
-        // Try to extract a helpful error message
         let errorMessage = `Provider API request failed with status ${response.status}`
         try {
           const errorData = await response.json()
@@ -79,12 +119,12 @@ export class RouterBlockHandler implements BlockHandler {
       const result = await response.json()
 
       const chosenBlockId = result.content.trim().toLowerCase()
-      const chosenBlock = targetBlocks?.find((b) => b.id === chosenBlockId)
+      const chosenBlock = targetBlocks.find((b) => b.id === chosenBlockId)
 
       if (!chosenBlock) {
         logger.error(
           `Invalid routing decision. Response content: "${result.content}", available blocks:`,
-          targetBlocks?.map((b) => ({ id: b.id, title: b.title })) || []
+          targetBlocks.map((b) => ({ id: b.id, title: b.title }))
         )
         throw new Error(`Invalid routing decision: ${chosenBlockId}`)
       }
@@ -119,25 +159,33 @@ export class RouterBlockHandler implements BlockHandler {
    * @param block - Router block
    * @param context - Current execution context
    * @returns Array of potential target blocks with metadata
-   * @throws Error if target block not found
    */
-  private getTargetBlocks(block: SerializedBlock, context: ExecutionContext) {
-    return context.workflow?.connections
-      .filter((conn) => conn.source === block.id)
+  private getTargetBlocks(block: SerializedBlock, context: ExecutionContext): TargetBlock[] {
+    const connections = context.workflow?.connections.filter((conn) => conn.source === block.id);
+    if (!connections || connections.length === 0) {
+      logger.error(`Router block ${block.id} has no outgoing connections`);
+      return [];
+    }
+
+    return connections
       .map((conn) => {
         const targetBlock = context.workflow?.blocks.find((b) => b.id === conn.target)
         if (!targetBlock) {
-          throw new Error(`Target block ${conn.target} not found`)
+          logger.warn(`Target block ${conn.target} not found for router ${block.id}`);
+          return null;
+        }
+
+        if (!targetBlock.enabled) {
+          logger.warn(`Target block ${conn.target} is disabled for router ${block.id}`);
+          return null;
         }
 
         // Extract system prompt for agent blocks
         let systemPrompt = ''
         if (targetBlock.metadata?.id === 'agent') {
-          // Try to get system prompt from different possible locations
           systemPrompt =
             targetBlock.config?.params?.systemPrompt || targetBlock.inputs?.systemPrompt || ''
 
-          // If system prompt is still not found, check if we can extract it from inputs
           if (!systemPrompt && targetBlock.inputs) {
             systemPrompt = targetBlock.inputs.systemPrompt || ''
           }
@@ -145,15 +193,16 @@ export class RouterBlockHandler implements BlockHandler {
 
         return {
           id: targetBlock.id,
-          type: targetBlock.metadata?.id,
-          title: targetBlock.metadata?.name,
+          type: targetBlock.metadata?.id || 'unknown',
+          title: targetBlock.metadata?.name || 'Untitled Block',
           description: targetBlock.metadata?.description,
           subBlocks: {
-            ...targetBlock.config.params,
+            ...targetBlock.config?.params,
             systemPrompt: systemPrompt,
           },
           currentState: context.blockStates.get(targetBlock.id)?.output,
-        }
+        } as TargetBlock;
       })
+      .filter((block): block is TargetBlock => block !== null)
   }
 }

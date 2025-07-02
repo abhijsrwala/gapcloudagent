@@ -17,6 +17,7 @@
     "packages/*"
   ],
   "scripts": {
+    "start": "cd apps/sim && npm run start",
     "build": "dotenv -- turbo run build",
     "dev": "dotenv -- turbo run dev",
     "test": "dotenv -- turbo run test",

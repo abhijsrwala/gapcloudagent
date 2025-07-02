@@ -2,6 +2,7 @@ import { ReactNode } from 'react'
 import {
   AirtableIcon,
   ConfluenceIcon,
+  Dynamics365Icon,
   GithubIcon,
   GmailIcon,
   GoogleCalendarIcon,
@@ -28,6 +29,7 @@ export type OAuthProvider =
   | 'airtable'
   | 'notion'
   | 'jira'
+  | 'dynamics365'
   | string
 export type OAuthService =
   | 'google'
@@ -42,6 +44,7 @@ export type OAuthService =
   | 'airtable'
   | 'notion'
   | 'jira'
+  | 'dynamics365'
 
 // Define the interface for OAuth provider configuration
 export interface OAuthProviderConfig {
@@ -252,6 +255,26 @@ export const OAUTH_PROVIDERS: Record<string, OAuthProviderConfig> = {
     },
     defaultService: 'notion',
   },
+  dynamics365: {
+    id: 'dynamics365',
+    name: 'Dynamics 365',
+    icon: (props) => Dynamics365Icon(props),
+    services: {
+      dynamics365: {
+        id: 'dynamics365',
+        name: 'Dynamics 365',
+        description: 'Connect to Microsoft Dynamics 365 CRM.',
+        providerId: 'dynamics365',
+        icon: (props) => Dynamics365Icon(props),
+        baseProviderIcon: (props) => Dynamics365Icon(props),
+        scopes: [
+          'https://org589a2042.crm8.dynamics.com/.default',
+          'offline_access',
+        ],
+      },
+    },
+    defaultService: 'dynamics365',
+  },
 }
 
 // Helper function to get a service by provider and service ID
@@ -306,6 +329,8 @@ export function getServiceIdFromScopes(provider: OAuthProvider, scopes: string[]
     return 'airtable'
   } else if (provider === 'notion') {
     return 'notion'
+  } else if (provider === 'dynamics365') {
+    return 'dynamics365'
   }
 
   return providerConfig.defaultService
@@ -378,6 +403,7 @@ export async function refreshOAuthToken(
     // Get the provider from the providerId (e.g., 'google-drive' -> 'google')
     const provider = providerId.split('-')[0]
 
+    logger.debug('Refreshing OAuth token', { provider, refreshToken })
     // Determine the token endpoint based on the provider
     let tokenEndpoint: string
     let clientId: string | undefined
@@ -428,6 +454,12 @@ export async function refreshOAuthToken(
         tokenEndpoint = 'https://api.notion.com/v1/oauth/token'
         clientId = process.env.NOTION_CLIENT_ID
         clientSecret = process.env.NOTION_CLIENT_SECRET
+        break
+      case 'dynamics365':
+        const tenantId = process.env.DYNAMICS_TENANT_ID || 'common'
+        tokenEndpoint = `https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/token`
+        clientId = process.env.DYNAMICS_CLIENT_ID
+        clientSecret = process.env.DYNAMICS_CLIENT_SECRET
         break
       default:
         throw new Error(`Unsupported provider: ${provider}`)

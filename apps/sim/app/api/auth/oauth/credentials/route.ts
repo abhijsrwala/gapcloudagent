@@ -16,6 +16,14 @@ interface GoogleIdToken {
   name?: string
 }
 
+interface MicrosoftIdToken {
+  email?: string
+  name?: string
+  preferred_username?: string
+  upn?: string
+  tid?: string
+}
+
 /**
  * Get credentials for a specific provider
  */
@@ -59,18 +67,69 @@ export async function GET(request: NextRequest) {
         // Try multiple methods to get a user-friendly display name
         let displayName = ''
 
-        // Method 1: Try to extract email from ID token (works for Google, etc.)
-        if (acc.idToken) {
+        // Method 1: Try to extract information from tokens based on provider
+        if (acc.accessToken || acc.idToken) {
           try {
-            const decoded = jwtDecode<GoogleIdToken>(acc.idToken)
-            if (decoded.email) {
-              displayName = decoded.email
-            } else if (decoded.name) {
-              displayName = decoded.name
+            if (baseProvider === 'dynamics365') {
+              // Try to get user info from Microsoft token
+              const token = acc.idToken || acc.accessToken
+              if (!token) {
+                logger.warn(`[${requestId}] No token available for Dynamics 365 account`, {
+                  accountId: acc.id,
+                })
+                displayName = 'Dynamics 365 User (No Token)'
+              } else {
+                const decoded = jwtDecode<MicrosoftIdToken>(token)
+                
+                // Use the most specific identifier available
+                displayName = decoded.name || 
+                            decoded.email || 
+                            decoded.preferred_username ||
+                            decoded.upn ||
+                            `Dynamics 365 User (${decoded.tid || 'Unknown Org'})`
+
+                // If we couldn't get a display name from the token, try to get user info from Microsoft Graph
+                if (!displayName && acc.accessToken) {
+                  try {
+                    const graphResponse = await fetch('https://org589a2042.crm8.dynamics.com/api/data/v9.0/WhoAmI', {
+                      headers: {
+                        'Authorization': `Bearer ${acc.accessToken}`,
+                        'Accept': 'application/json',
+                      },
+                    })
+
+                    if (graphResponse.ok) {
+                      const userData = await graphResponse.json()
+                      displayName = userData.displayName || 
+                                  userData.userPrincipalName ||
+                                  userData.mail ||
+                                  'Dynamics 365 User'
+                    }
+                  } catch (graphError) {
+                    logger.warn(`[${requestId}] Error fetching Microsoft Graph user info`, {
+                      accountId: acc.id,
+                      error: graphError,
+                    })
+                  }
+                }
+              }
+            } else if (acc.idToken) {
+              // Handle other providers with ID tokens
+              try {
+                const decoded = jwtDecode<GoogleIdToken>(acc.idToken)
+                displayName = decoded.email || decoded.name || ''
+              } catch (error) {
+                logger.warn(`[${requestId}] Error decoding token for non-Dynamics provider`, {
+                  accountId: acc.id,
+                  provider: baseProvider,
+                  error,
+                })
+              }
             }
           } catch (error) {
-            logger.warn(`[${requestId}] Error decoding ID token`, {
+            logger.warn(`[${requestId}] Error decoding token`, {
               accountId: acc.id,
+              provider: baseProvider,
             })
           }
         }

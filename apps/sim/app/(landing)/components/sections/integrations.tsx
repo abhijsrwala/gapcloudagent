@@ -365,17 +365,13 @@ function Integrations() {
                       source: 'agent1',
                       target: 'slack1',
                       type: 'smoothstep',
-                      style: { stroke: '#404040', strokeWidth: 1.5, strokeDasharray: '4 4' },
+                      style: { stroke: '#404040', strokeWidth: 1.5 },
                       animated: true,
                     },
                   ]}
                   nodeTypes={{ heroBlock: HeroBlock }}
                   connectionLineType={ConnectionLineType.SmoothStep}
-                  connectionLineStyle={{
-                    stroke: '#404040',
-                    strokeWidth: 1.5,
-                    strokeDasharray: '4 4',
-                  }}
+                  connectionLineStyle={{ stroke: '#404040', strokeWidth: 1.5 }}
                   defaultViewport={{ x: 0, y: 0, zoom: 1 }}
                   nodesDraggable={false}
                   nodesConnectable={false}
@@ -453,17 +449,13 @@ function Integrations() {
                       source: 'start',
                       target: 'function1',
                       type: 'smoothstep',
-                      style: { stroke: '#404040', strokeWidth: 1.5, strokeDasharray: '4 4' },
+                      style: { stroke: '#404040', strokeWidth: 1.5 },
                       animated: true,
                     },
                   ]}
                   nodeTypes={{ heroBlock: HeroBlock }}
                   connectionLineType={ConnectionLineType.SmoothStep}
-                  connectionLineStyle={{
-                    stroke: '#404040',
-                    strokeWidth: 1.5,
-                    strokeDasharray: '4 4',
-                  }}
+                  connectionLineStyle={{ stroke: '#404040', strokeWidth: 1.5 }}
                   defaultViewport={{ x: 0, y: 0, zoom: 1 }}
                   nodesDraggable={false}
                   nodesConnectable={false}

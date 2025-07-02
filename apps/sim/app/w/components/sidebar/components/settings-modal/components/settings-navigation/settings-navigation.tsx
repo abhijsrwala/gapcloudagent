@@ -69,11 +69,11 @@ const allNavigationItems: NavigationItem[] = [
     label: 'API Keys',
     icon: KeySquare,
   },
-  {
-    id: 'privacy',
-    label: 'Privacy',
-    icon: Shield,
-  },
+  // {
+  //   id: 'privacy',
+  //   label: 'Privacy',
+  //   icon: Shield,
+  // },
   {
     id: 'subscription',
     label: 'Subscription',

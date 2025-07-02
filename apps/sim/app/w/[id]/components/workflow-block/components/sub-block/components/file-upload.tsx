@@ -145,6 +145,8 @@ export function FileUpload({
 
       // Upload each file separately
       for (const file of validFiles) {
+
+        console.log(`Uploading file: ${file.name} (${file.size} bytes)`)
         try {
           // First, try to get a pre-signed URL for direct upload
           const presignedResponse = await fetch('/api/files/presigned', {
@@ -158,8 +160,10 @@ export function FileUpload({
               fileSize: file.size,
             }),
           })
+          console.log('Presigned response:', presignedResponse)
 
           const presignedData = await presignedResponse.json()
+          console.log('Presigned data:', presignedData)
 
           if (presignedResponse.ok && presignedData.directUploadSupported) {
             // Use direct upload method

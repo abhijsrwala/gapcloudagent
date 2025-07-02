@@ -30,7 +30,6 @@ export const HeroEdge = ({
       style={{
         strokeWidth: 2,
         stroke: '#404040',
-        strokeDasharray: '5,5',
         zIndex: 5,
         ...style,
       }}

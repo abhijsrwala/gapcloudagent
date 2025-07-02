@@ -2,7 +2,10 @@ import { stripeClient } from '@better-auth/stripe/client'
 import { emailOTPClient, genericOAuthClient } from 'better-auth/client/plugins'
 import { organizationClient } from 'better-auth/client/plugins'
 import { createAuthClient } from 'better-auth/react'
-import { isProd } from '@/lib/environment'
+import { isProd, isDev } from '@/lib/environment'
+import { createLogger } from '@/lib/logs/console-logger'
+
+const logger = createLogger('auth-client')
 
 export function getBaseURL() {
   let baseURL
@@ -20,6 +23,12 @@ export function getBaseURL() {
   return baseURL
 }
 
+logger.info('Initializing BetterAuth client', {
+  baseURL: getBaseURL(),
+  isProd,
+  isDev,
+})
+
 export const client = createAuthClient({
   baseURL: getBaseURL(),
   plugins: [
@@ -36,6 +45,8 @@ export const client = createAuthClient({
     organizationClient(),
   ],
 })
+
+logger.debug("Client initialized", {client })
 
 export const { useSession, useActiveOrganization } = client
 

@@ -11,6 +11,7 @@ import { BrowserUseBlock } from './blocks/browser_use'
 import { ClayBlock } from './blocks/clay'
 import { ConditionBlock } from './blocks/condition'
 import { ConfluenceBlock } from './blocks/confluence'
+import { Dynamics365Block } from './blocks/dynamics365'
 import { ElevenLabsBlock } from './blocks/elevenlabs'
 import { EvaluatorBlock } from './blocks/evaluator'
 import { ExaBlock } from './blocks/exa'
@@ -65,6 +66,7 @@ export const registry: Record<string, BlockConfig> = {
   clay: ClayBlock,
   condition: ConditionBlock,
   confluence: ConfluenceBlock,
+  dynamics365: Dynamics365Block,
   elevenlabs: ElevenLabsBlock,
   evaluator: EvaluatorBlock,
   exa: ExaBlock,

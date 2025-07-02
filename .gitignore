@@ -75,3 +75,5 @@ start-collector.sh
 
 # Turborepo
 .turbo
+
+docker-compose.yml

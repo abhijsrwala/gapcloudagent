@@ -26,6 +26,7 @@ function getParserInstances(): Record<string, FileParser> {
           // Import the PdfParser using ES module import to avoid test file access
           const { PdfParser } = require('./pdf-parser')
           parserInstances['pdf'] = new PdfParser()
+
           logger.info('PDF parser loaded successfully')
         } catch (pdfParseError) {
           // If that fails, fallback to our raw PDF parser

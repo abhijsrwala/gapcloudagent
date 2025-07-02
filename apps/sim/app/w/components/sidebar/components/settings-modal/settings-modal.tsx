@@ -119,7 +119,8 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
     }
   }, [onOpenChange])
 
-  const isSubscriptionEnabled = !!client.subscription
+  // const isSubscriptionEnabled = !!client.subscription
+  const isSubscriptionEnabled = false
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -183,9 +184,9 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
                 <TeamManagement />
               </div>
             )}
-            <div className={cn('h-full', activeSection === 'privacy' ? 'block' : 'hidden')}>
+            {/* <div className={cn('h-full', activeSection === 'privacy' ? 'block' : 'hidden')}>
               <Privacy />
-            </div>
+            </div> */}
           </div>
         </div>
       </DialogContent>

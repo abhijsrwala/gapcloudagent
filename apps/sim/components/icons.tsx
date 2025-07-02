@@ -2448,3 +2448,26 @@ export function ClayIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   )
 }
+
+export function Dynamics365Icon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M12 2L3 7v10l9 5 9-5V7l-9-5z" />
+      <path d="M12 6l-6 3.5v5L12 18l6-3.5v-5L12 6z" />
+      <path d="M12 6v12" />
+      <path d="M8.5 8.5l7 7" />
+      <path d="M15.5 8.5l-7 7" />
+    </svg>
+  )
+}

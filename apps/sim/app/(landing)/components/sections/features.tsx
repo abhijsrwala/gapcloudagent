@@ -84,7 +84,7 @@ const features: FeaturesArray = [
         source: 'agent1',
         target: 'slack1',
         type: 'smoothstep',
-        style: { stroke: '#404040', strokeWidth: 1.5, strokeDasharray: '4 4' },
+        style: { stroke: '#404040', strokeWidth: 1.5 },
         animated: true,
       },
     ],
@@ -131,7 +131,7 @@ const features: FeaturesArray = [
         source: 'start',
         target: 'function1',
         type: 'smoothstep',
-        style: { stroke: '#404040', strokeWidth: 1.5, strokeDasharray: '4 4' },
+        style: { stroke: '#404040', strokeWidth: 1.5 },
         animated: true,
       },
     ],
@@ -178,7 +178,7 @@ const features: FeaturesArray = [
         source: 'function1',
         target: 'agent1',
         type: 'smoothstep',
-        style: { stroke: '#404040', strokeWidth: 1.5, strokeDasharray: '4 4' },
+        style: { stroke: '#404040', strokeWidth: 1.5 },
         animated: true,
       },
     ],
@@ -225,7 +225,7 @@ const features: FeaturesArray = [
         source: 'router1',
         target: 'agent1',
         type: 'smoothstep',
-        style: { stroke: '#404040', strokeWidth: 1.5, strokeDasharray: '4 4' },
+        style: { stroke: '#404040', strokeWidth: 1.5 },
         animated: true,
       },
     ],
@@ -256,7 +256,7 @@ function FeaturesFlow({ nodes, edges }: { nodes: Node[]; edges: Edge[] }) {
         onEdgesChange={onEdgesChange}
         nodeTypes={nodeTypes}
         connectionLineType={ConnectionLineType.SmoothStep}
-        connectionLineStyle={{ stroke: '#404040', strokeWidth: 1.5, strokeDasharray: '4 4' }}
+        connectionLineStyle={{ stroke: '#404040', strokeWidth: 1.5 }}
         defaultViewport={{ x: 80, y: 0, zoom: 1.3 }}
         nodesDraggable={false}
         nodesConnectable={false}

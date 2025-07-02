@@ -69,7 +69,7 @@ const desktopEdges: Edge[] = [
     targetHandle: 'target',
     type: 'heroEdge',
     animated: true,
-    style: { stroke: '#404040', strokeWidth: 2, strokeDasharray: '5,5' },
+    style: { stroke: '#404040', strokeWidth: 2 },
     zIndex: 5,
   },
   {
@@ -80,7 +80,7 @@ const desktopEdges: Edge[] = [
     targetHandle: 'target',
     type: 'heroEdge',
     animated: true,
-    style: { stroke: '#404040', strokeWidth: 2, strokeDasharray: '5,5' },
+    style: { stroke: '#404040', strokeWidth: 2 },
     zIndex: 5,
   },
   {
@@ -91,7 +91,7 @@ const desktopEdges: Edge[] = [
     targetHandle: 'target',
     type: 'heroEdge',
     animated: true,
-    style: { stroke: '#404040', strokeWidth: 2, strokeDasharray: '5,5' },
+    style: { stroke: '#404040', strokeWidth: 2 },
     zIndex: 5,
   },
 ]
@@ -147,7 +147,7 @@ const mobileEdges: Edge[] = [
     targetHandle: 'target',
     type: 'heroEdge',
     animated: true,
-    style: { stroke: '#404040', strokeWidth: 2, strokeDasharray: '5,5' },
+    style: { stroke: '#404040', strokeWidth: 2 },
     zIndex: 5,
   },
 ]
@@ -249,7 +249,7 @@ export function HeroWorkflow() {
         edgeTypes={edgeTypes}
         defaultEdgeOptions={{ type: 'heroEdge', animated: true }}
         connectionLineType={ConnectionLineType.SmoothStep}
-        connectionLineStyle={{ stroke: '#404040', strokeWidth: 2, strokeDasharray: '5,5' }}
+        connectionLineStyle={{ stroke: '#404040', strokeWidth: 2 }}
         minZoom={0.1}
         maxZoom={1.5}
         proOptions={{ hideAttribution: true }}

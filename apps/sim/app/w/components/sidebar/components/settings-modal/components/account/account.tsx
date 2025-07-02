@@ -230,7 +230,7 @@ export function Account({ onOpenChange }: AccountProps) {
                 >
                   <div className="flex items-center gap-3">
                     <div className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-blue-500">
-                      {userData.isLoggedIn ? (
+                      {/* {userData.isLoggedIn ? (
                         <div className="h-full w-full flex items-center justify-center bg-[#802FFF]">
                           <AgentIcon className="text-white transition-transform duration-200 group-hover:scale-110 -translate-y-[0.5px]" />
                         </div>
@@ -238,7 +238,7 @@ export function Account({ onOpenChange }: AccountProps) {
                         <div className="bg-gray-500 h-full w-full flex items-center justify-center">
                           <AgentIcon className="text-white transition-transform duration-200 group-hover:scale-110" />
                         </div>
-                      )}
+                      )} */}
                       {userData.isLoggedIn && accounts.length > 1 && (
                         <div className="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-medium text-primary-foreground">
                           {accounts.length}
